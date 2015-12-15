@@ -5,3 +5,14 @@
 
 <h2>Login</h2>
 
+@Html.ValidationSummary()
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+
+    <p>
+        <button type="submit">Login</button>
+    </p>
+}
+
