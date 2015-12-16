@@ -114,11 +114,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDbContexts.cs" />
+    <Compile Include="Context\AppDbContexts.cs" />
+    <Compile Include="Context\AppDbInitializer.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\UserData.cs" />
+    <Compile Include="Models\FriendsList.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\Interest.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Wall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

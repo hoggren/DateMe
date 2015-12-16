@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,19 +13,8 @@ using Models.Models;
 namespace DateMe.Controllers
 {
     [AllowAnonymous]
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
-        private readonly UserManager<AppUser> userManager;
-
-        public AuthController() : this (Startup.UserManagerFactory.Invoke())
-        {
-              
-        }
-
-        public AuthController(UserManager<AppUser> userManager)
-        {
-            this.userManager = userManager;
-        }
              
         [HttpGet]
         public ActionResult Login(string returnUrl)
@@ -86,25 +77,75 @@ namespace DateMe.Controllers
             {
                 return View();  
             }
-
+            /*
+           var user = new AppUser
+           {
+               UserName = model.Email,
+               UserData = new UserData
+               {
+                   Nickname = model.Nickname,
+                   PhotoPath = "",
+                   Description = "",
+                   DateOfBirth = DateTime.Now,
+                   Location = new Location {Country = "Sweden", City = "Uppsala"},
+                   Interests = new List<Interest>()
+               },
+              Profile = new Profile
+               {
+                   FirstName = model.Firstname,
+                   LastName = model.Lastname,
+                   FriendsList = new FriendsList(),
+                   Wall = new Wall()
+               }
+               
+        };
+        */
             var user = new AppUser
             {
-                UserName = model.Email,
+                UserName = model.Email
+            };
+            user.UserData = new UserData 
+            {
+                Nickname = model.Nickname,
+                PhotoPath = "",
+                Description = "",
+                DateOfBirth = DateTime.Now
+            };
+            user.UserData.Location = new Location {Country = "Sweden", City = "Uppsala"};
+            user.UserData.Interests = new List<Interest>();
+
+            user.Profile = new Profile
+            {
                 FirstName = model.Firstname,
                 LastName = model.Lastname,
-                Nickname = model.Nickname
+                //FriendsList = new FriendsList(),
+                //Wall = new Wall()
             };
-            var result = await userManager.CreateAsync(user, model.Password);
+            try
+            {
+                var result = await userManager.CreateAsync(user, model.Password);
+            
+
 
             if (result.Succeeded)
             {
-              //  await SignIn(user)
+                await SignIn(user);
                 return RedirectToAction("Index", "Home");
             }
 
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
+            }
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var x in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine(x.Entry.Entity.GetType().Name);
+                    Debug.WriteLine(x.ValidationErrors.First().ErrorMessage);
+                }
             }
 
             return View();
