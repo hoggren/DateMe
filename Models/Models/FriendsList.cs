@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Models.Models
 {
-    public class AppUser : IdentityUser
+    public class FriendsList : List<AppUser>, IModel
     {
-        public virtual UserData UserData { get; set; }
+        [Key, ForeignKey("Profile")]
+        public int Id { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

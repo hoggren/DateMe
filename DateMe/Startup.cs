@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Models;
+using Models.Context;
 using Models.Models;
 using Owin;
 
@@ -18,7 +19,7 @@ namespace DateMe
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                    LoginPath = new PathString("/Auth/Login")
+                    LoginPath = new PathString("/Auth/Register")
             });
 
             UserManagerFactory = () =>
@@ -27,7 +28,7 @@ namespace DateMe
 
                 usermanager.UserValidator = new UserValidator<AppUser>(usermanager)
                 {
-                    AllowOnlyAlphanumericUserNames = false //CP SKIT
+                    AllowOnlyAlphanumericUserNames = false
                 };
 
                 return usermanager;
