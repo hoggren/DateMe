@@ -11,13 +11,11 @@ namespace Models.Models
     public class UserData
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid UserId { get; set; }
 
- //       public string AppUserId { get; set; }
-
-        [ForeignKey("AppUser")]
         public virtual AppUser AppUser { get; set; }
-
+        
         public virtual Location Location { get; set; }
 
         public string Nickname { get; set; }

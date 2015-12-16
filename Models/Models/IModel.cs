@@ -8,6 +8,6 @@ namespace Models.Models
 {
     interface IModel
     {
-          int Id { get; set; }
+          Guid Id { get; set; }
     }
 }

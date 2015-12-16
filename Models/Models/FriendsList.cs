@@ -9,8 +9,8 @@ namespace Models.Models
 {
     public class FriendsList : List<AppUser>, IModel
     {
-        [Key, ForeignKey("Profile")]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

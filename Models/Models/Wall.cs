@@ -7,10 +7,9 @@ using System.Web;
 
 namespace Models.Models
 {
-    public class Wall : List<Message>, IModel
+    public class Wall : List<Message>
     {
-        [ForeignKey("Profile")]
-        public int Id { get; set; }
+        public Guid WallId { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

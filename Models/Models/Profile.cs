@@ -10,10 +10,9 @@ namespace Models.Models
     public class Profile
     {
         [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid ProfileId { get; set; }
 
-        [ForeignKey("AppUser")]
-      //  public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
 
         public string FirstName { get; set; }
