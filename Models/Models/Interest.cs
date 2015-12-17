@@ -13,6 +13,7 @@ namespace Models.Models
         {
             Interested = new HashSet<UserData>();
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid InterestId { get; set; }

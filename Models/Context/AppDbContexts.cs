@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Models;
+using System.Data.Entity;
 
 namespace Models.Context
 {
@@ -11,6 +12,7 @@ namespace Models.Context
             
         }
 
-
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Interest> Interests { get; set; }
     }
 }

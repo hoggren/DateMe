@@ -23,9 +23,9 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>
-                            @Html.ActionLink("Logout", "Logout", "Auth")
-                        </li>
+                        <li>@Html.ActionLink("Search", "Index", "Search")</li>
+                        <li>@Html.ActionLink("Super-Match!","Index","Supermatch")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
                     }
                     else
                     {
@@ -39,8 +39,6 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
                 </ul>
             </div>
         </div>

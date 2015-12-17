@@ -15,10 +15,12 @@ namespace DateMe.Controllers
     [AllowAnonymous]
     public class AuthController : BaseController
     {
-             
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToAction("Index", "Home");
+
             var model = new LoginViewModel()
             {
                 ReturnUrl = returnUrl
@@ -30,10 +32,11 @@ namespace DateMe.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel viewModel)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
-            {
                 return View();
-            }
 
             var user = await userManager.FindAsync(viewModel.Email, viewModel.Password);
 
@@ -48,14 +51,6 @@ namespace DateMe.Controllers
             return View(viewModel);
         }
 
-        private async Task SignIn(AppUser user)
-        {
-            var identity = await userManager.CreateIdentityAsync(
-                user, DefaultAuthenticationTypes.ApplicationCookie);
-
-            Request.GetOwinContext().Authentication.SignIn(identity);
-        }
-
         public ActionResult Logout()
         {
             Request.GetOwinContext().Authentication.SignOut();
@@ -66,6 +61,9 @@ namespace DateMe.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToAction("Index", "Home");
+
             var model = new RegisterViewModel();
             return View(model);
         }
@@ -73,74 +71,63 @@ namespace DateMe.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (User.Identity.IsAuthenticated)
+                RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
-            {
-                return View();  
-            }
-            /*
-           var user = new AppUser
-           {
-               UserName = model.Email,
-               UserData = new UserData
-               {
-                   Nickname = model.Nickname,
-                   PhotoPath = "",
-                   Description = "",
-                   DateOfBirth = DateTime.Now,
-                   Location = new Location {Country = "Sweden", City = "Uppsala"},
-                   Interests = new List<Interest>()
-               },
-              Profile = new Profile
-               {
-                   FirstName = model.Firstname,
-                   LastName = model.Lastname,
-                   FriendsList = new FriendsList(),
-                   Wall = new Wall()
-               }
-               
-        };
-        */
+                return View(new RegisterViewModel());
+
             var user = new AppUser
             {
                 UserName = model.Email
             };
+
             user.UserData = new UserData 
             {
                 Nickname = model.Nickname,
                 PhotoPath = "",
                 Description = "",
-                DateOfBirth = DateTime.Now
+                DateOfBirth = DateTime.Now,
+                Gender = model.Gender,
+                LookingFor = model.LookingFor
             };
-            user.UserData.Location = new Location {Country = "Sweden", City = "Uppsala"};
-            user.UserData.Interests = new List<Interest>();
+
+            user.UserData.Location = new Location
+            {
+                Country = "Sweden",
+                City = model.City
+            };
 
             user.Profile = new Profile
             {
                 FirstName = model.Firstname,
                 LastName = model.Lastname,
-                //FriendsList = new FriendsList(),
-                //Wall = new Wall()
+                
             };
+
+            user.UserData.Interests = new List<Interest>();
+            user.Profile.Wall = new Wall();
+            user.Profile.FriendsList = new FriendsList();
+
             try
             {
                 var result = await userManager.CreateAsync(user, model.Password);
-            
 
+                if (result.Succeeded)
+                {
+                    await SignIn(user);
+                    return RedirectToAction("Index", "Home");
+                }
 
-            if (result.Succeeded)
-            {
-                await SignIn(user);
-                return RedirectToAction("Index", "Home");
-            }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error);
+                }
 
             }
             catch (DbEntityValidationException e)
             {
+                //Visa i en Error-view!
                 foreach (var x in e.EntityValidationErrors)
                 {
                     Debug.WriteLine(x.Entry.Entity.GetType().Name);
@@ -148,18 +135,16 @@ namespace DateMe.Controllers
                 }
             }
 
-            return View();
+            return View(model);
         }
 
-        protected override void Dispose(bool disposing)
+        private async Task SignIn(AppUser user)
         {
-            if (disposing && userManager != null)
-            {
-                userManager.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+            var identity = await userManager.CreateIdentityAsync(
+                user, DefaultAuthenticationTypes.ApplicationCookie);
 
+            Request.GetOwinContext().Authentication.SignIn(identity);
+        }
 
         private string GetRedirectedUrl(string returnUrl)
         {
@@ -171,5 +156,13 @@ namespace DateMe.Controllers
             return returnUrl;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && userManager != null)
+            {
+                userManager.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

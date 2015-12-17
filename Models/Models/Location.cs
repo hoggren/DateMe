@@ -13,6 +13,7 @@ namespace Models.Models
         {
             UserDatas = new List<UserData>();
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid LocationId { get; set; }

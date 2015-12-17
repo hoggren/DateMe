@@ -6,18 +6,11 @@ using System.Web.Mvc;
 
 namespace DateMe.Controllers
 {
-    [AllowAnonymous]
-    public class HomeController : BaseController
+    public class SearchController : Controller
     {
+        // GET: Search
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
     }

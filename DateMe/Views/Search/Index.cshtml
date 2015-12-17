@@ -1,0 +1,26 @@
+﻿@model DateMe.ViewModels.SearchViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label for="NicknameQuery">Search by nickname</label>
+        @Html.TextBoxFor(m => m.NicknameQuery, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NicknameQuery)
+    </div>
+
+    <div class="form-group">
+        <label for="InterestQuery">Search by interest</label>
+        @Html.TextBoxFor(m => m.InterestQuery, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.InterestQuery)
+    </div>
+
+    <p>Search for users or try our Super-Match! function to find your perfect match!</p>
+    
+    <button type="button" class="btn btn-default">Search</button>
+}

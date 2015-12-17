@@ -10,11 +10,11 @@ namespace DateMe.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 1)]
         public string Password { get; set; }
 
         [HiddenInput]
