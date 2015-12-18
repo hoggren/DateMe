@@ -11,7 +11,7 @@ namespace Models.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid LocationId { get; set; }
+        public Guid WallId { get; set; }
         public string Text { get; set; }
     }
 }

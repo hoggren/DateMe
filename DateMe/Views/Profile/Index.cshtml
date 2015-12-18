@@ -1,0 +1,69 @@
+﻿@using DateMe.ViewModels
+@model DateMe.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-md.12">
+        <div class="row">
+            <h2>@Model.Nickname (@Model.Gender.Substring(0, 1)@Model.Age, @Model.Location.City)</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>
+                    @Model.Gender looking for @Model.LookingFor.ToLower()
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h3>
+                    Who is @Model.Nickname?
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="../../Content/Images/example_sexy.png"/> <br />
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <p>
+                I’d like first to apologize for the typos I might have… I must confess I’m French (I know… nobody’s perfect)
+                and I’m pretty much new in this country (I’ve been around for 2 years). I thought I would throw some keywords that
+                would describe what I like to do. If you recognize yourself in some of them, I think it might be worth taking the
+                time to keep on reading my profile.
+            </p>
+            <p>
+                Travel, surprises, music, dancing, sports, books, last minute plans, open mind, photography, museum, craziness, spontaneity,
+                going out (but also staying in), sharing, simplicity, respect, flip flops (yes, the sandals), down to earth (however fantasy
+                is also very important), people, casual, word, news, work, sense of humor about yourself, awareness.
+            </p>
+            <p>
+                In addition, if you happen to pronounce the following sentences regularly, we’re definitely increasing the chance of
+                a good match here:<br />
+                “Ok let’s give it a try”<br />
+                “To be honest, I don’t know”<br />
+                “I respect that”<br />
+                “J’adore les escargots” ok this one doesn’t really count either… :-)<br />
+            </p>
+            <p>
+                I am crazy, stupid, and charming.
+            </p>
+        </div>
+        <div class="row">
+            @{ Html.RenderPartial("~/Views/Shared/_Wall.cshtml"); }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

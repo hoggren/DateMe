@@ -87,7 +87,7 @@ namespace DateMe.Controllers
                 Nickname = model.Nickname,
                 PhotoPath = "",
                 Description = "",
-                DateOfBirth = DateTime.Now,
+                DateOfBirth = new DateTime(1984, 3, 23),
                 Gender = model.Gender,
                 LookingFor = model.LookingFor
             };
@@ -106,7 +106,12 @@ namespace DateMe.Controllers
             };
 
             user.UserData.Interests = new List<Interest>();
-            user.Profile.Wall = new Wall();
+            user.Profile.Wall = new Wall
+            {
+                new Message {Text="I love you!!!"},
+                new Message {Text="I hate you so much righht now"},
+                new Message {Text="Thanks for the wonderful hot date with lots of great sex"}
+            };
             user.Profile.FriendsList = new FriendsList();
 
             try

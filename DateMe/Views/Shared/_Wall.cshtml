@@ -1,0 +1,13 @@
+﻿@model DateMe.ViewModels.ProfileViewModel
+
+<h3>Meddelanden</h3>
+@foreach (var message in Model.Wall)
+{
+    <div class="row" id="wall_message">
+        <h5>Rubrik</h5>
+        <p>
+            @message.Text
+        </p>
+    </div>
+
+}
