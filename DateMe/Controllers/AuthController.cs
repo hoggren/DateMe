@@ -19,7 +19,7 @@ namespace DateMe.Controllers
         public ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             var model = new LoginViewModel()
             {
@@ -33,7 +33,7 @@ namespace DateMe.Controllers
         public async Task<ActionResult> Login(LoginViewModel viewModel)
         {
             if (User.Identity.IsAuthenticated)
-                RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             if (!ModelState.IsValid)
                 return View();
@@ -62,7 +62,7 @@ namespace DateMe.Controllers
         public ActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
-                RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             var model = new RegisterViewModel();
             return View(model);
@@ -72,7 +72,7 @@ namespace DateMe.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (User.Identity.IsAuthenticated)
-                RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             if (!ModelState.IsValid)
                 return View(new RegisterViewModel());

@@ -9,9 +9,5 @@ namespace DateMe.ViewModels
     public class SearchViewModel
     {
         public string NicknameQuery { get; set; }
-
-        public string InterestQuery { get; set; }
-
-        public string CityQuery { get; set; }
     }
 }

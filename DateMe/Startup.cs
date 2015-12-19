@@ -7,6 +7,8 @@ using Models;
 using Models.Context;
 using Models.Models;
 using Owin;
+using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace DateMe
 {
@@ -33,6 +35,11 @@ namespace DateMe
 
                 return usermanager;
             };
+        }
+
+        public void Application_Start()
+        {
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
         }
     }
 }

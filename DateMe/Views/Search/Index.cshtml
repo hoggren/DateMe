@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Search</h2>
 
 @using (Html.BeginForm())
 {
@@ -14,13 +14,24 @@
         @Html.ValidationMessageFor(m => m.NicknameQuery)
     </div>
 
-    <div class="form-group">
-        <label for="InterestQuery">Search by interest</label>
-        @Html.TextBoxFor(m => m.InterestQuery, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.InterestQuery)
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th data-bind="click: function() { sortByColumn('Nickname') }">Nickname</th>
+                <th data-bind="click: function() { sortByColumn('City') }">City</th>
+            </tr>
+        </thead>
 
-    <p>Search for users or try our Super-Match! function to find your perfect match!</p>
-    
-    <button type="button" class="btn btn-default">Search</button>
+        <tbody data-bind="foreach: result">
+            <tr>
+                <td><a href="#" data-bind="text: Nickname, attr: { href: '/Profile/'+ Id }"></a></td>
+                <td data-bind="text: City"></td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script src="~/Scripts/Knockout/searchviewmodel.js"></script>
 }

@@ -6,84 +6,71 @@ using Models.Models;
 using System.Linq;
 using System.Collections.Generic;
 
+using DateMe.ViewModels.Api;
+using System.Web.Http.Description;
+using System.Linq.Expressions;
+using System;
+using System.Data.Entity;
+
 namespace DateMe.Controllers.Api
 {
     public class UsersController : ApiController
     {
-        //private AppDbContext db;
+        private AppDbContext db = new AppDbContext();
 
-        public List<AppUser> GetAppusers(string query)
-        {
-            List<AppUser> result;
-
-            using (var db = new AppDbContext())
+        private static readonly Expression<Func<AppUser, UserDto>> AsUserDto =
+            user => new UserDto
             {
-                result = (from u in db.Users
-                          where u.UserData.Nickname.Contains(query)
-                          select u).ToList();
+                Id = user.UserData.UserId,
+                Nickname = user.UserData.Nickname,
+                Description = user.UserData.Description,
+                City = user.UserData.Location.City,
+                PhotoPath = user.UserData.PhotoPath,
+                DateOfBirth = user.UserData.DateOfBirth,
+                Gender = user.UserData.Gender,
+                LookingFor = user.UserData.LookingFor
+            };
 
-                return result;
-            }
+        public IQueryable<UserDto> GetAppusers(string query)
+        {
+            return db.Users.Where(u => u.UserData.Nickname.Contains(query)).Select(AsUserDto);
         }
+
+        [ResponseType(typeof(UserDto))]
         public IHttpActionResult GetAppUser(string id)
         {
-            if (!User.Identity.IsAuthenticated)
+            AppUser user = null;
+
+            switch (id)
             {
-                return Unauthorized();
-            }
+                case "current":
+                case "Current":
+                    user = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
 
-            using(var db = new AppDbContext())
-            {
-                AppUser user = null;
+                    var currentUser = new UserDto(user);
+                    return Ok(currentUser);
 
-                switch (id)
-                {
-                    case "current":
-                    case "Current":
-                        user = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
-                        
-                        var currentUser = new
-                        {
-                            Id = user.Id,
-                            Nickname = user.UserData.Nickname,
-                            Description = user.UserData.Description,
-                            Interest = user.UserData.Interests,
-                            Location = user.UserData.Location.City,
-                            PhotoPath = user.UserData.PhotoPath,
-                            Gender = user.UserData.Gender,
-                            LookingFor = user.UserData.LookingFor
-                            //NewMessageCount
-                            //messageCount
-                            //NewFriendRequests
-                        };
+                default:
+                    user = Startup.UserManagerFactory.Invoke().FindById(id);
 
-                        return Ok(currentUser);
+                    if (user == null)
+                    {
+                        return NotFound();
+                    }
 
-                    default:
-                        user = Startup.UserManagerFactory.Invoke().FindById(id);
-
-                        if (user == null)
-                        {
-                            return NotFound();
-                        }
-
-                        var friendlyUser = new
-                        {
-                            Id = user.Id,
-                            Nickname = user.UserData.Nickname
-                        };
-
-                        return Ok(friendlyUser);
-
-                        var unfriendlyUser = new
-                        {
-                            Id = user.Id,
-                            Nickname = user.UserData.Nickname
-                        };
-
-                        break;
-                }
+                    var unfriendlyUser = new UserDto(user);
+                    return Ok(unfriendlyUser);
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && db != null)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }
