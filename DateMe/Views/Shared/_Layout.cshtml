@@ -16,13 +16,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("DateMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">DateMe</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li>@Html.ActionLink("My profile", "Index", "Profile")</li>
                         <li>@Html.ActionLink("Search", "Index", "Search")</li>
                         <li>@Html.ActionLink("Super-Match!","Index","Supermatch")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>

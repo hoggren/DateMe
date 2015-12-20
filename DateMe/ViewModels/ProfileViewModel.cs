@@ -17,6 +17,7 @@ namespace DateMe.ViewModels
         public Location Location { get; set; }
         public string Description { get; set; }
         public int Age { get; set; }
+        public string PhotoPath { get; set; }
         public Wall Wall { get; set; } 
 
         public ProfileViewModel(AppUser user)
@@ -32,6 +33,7 @@ namespace DateMe.ViewModels
             Location = userData.Location;
             Description = userData.Description;
             Age = DateTime.Today.Year - userData.DateOfBirth.Year;
+            PhotoPath = userData.PhotoPath;
 
             Wall = profile.Wall;
         }

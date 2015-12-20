@@ -21,7 +21,7 @@ namespace DateMe.Controllers.Api
         private static readonly Expression<Func<AppUser, UserDto>> AsUserDto =
             user => new UserDto
             {
-                Id = user.UserData.UserId,
+                Id = user.Id,
                 Nickname = user.UserData.Nickname,
                 Description = user.UserData.Description,
                 City = user.UserData.Location.City,

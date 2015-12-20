@@ -7,6 +7,7 @@ using DateMe.ViewModels;
 using Microsoft.AspNet.Identity;
 using Models.Context;
 using Models.Models;
+using System.IO;
 
 namespace DateMe.Controllers
 {
@@ -28,10 +29,103 @@ namespace DateMe.Controllers
             }
         }
 
-        public ActionResult Specific(string id)
+        public ActionResult U(string id)
         {
             var requestedUser = db.Users.Find(id);
-            return View(new ProfileViewModel(requestedUser));
+
+            if(requestedUser != null)
+            {
+                return View(new ProfileViewModel(requestedUser));
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            var currentUser = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            var model = new ProfileEditViewModel
+            {
+                Nickname = currentUser.UserData.Nickname,
+                Firstname = currentUser.Profile.FirstName,
+                Lastname = currentUser.Profile.LastName,
+                City = currentUser.UserData.Location.City,
+                Gender = currentUser.UserData.Gender,
+                LookingFor = currentUser.UserData.LookingFor,
+                Description = currentUser.UserData.Description,
+                Email = currentUser.UserName,
+                Password = "NOPENOPENOPENOPE"
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProfileEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var photoPath = "";
+
+            if(model.ImageFile != null)
+            {
+                if (!(new string[] { "image/jpeg", "image/pjpeg" }.Contains(model.ImageFile.ContentType)))
+                {
+                    ModelState.AddModelError("ImageFile", "Wrong filetype. Allowed filetypes: jpg, jpeg");
+                    return View(model);
+                }
+                else if (model.ImageFile.ContentLength > 1048576)
+                {
+                    ModelState.AddModelError("ImageFile", "Max file size: 1 Mb");
+                    return View(model);
+                }
+
+                var filepath = "/Content/Uploads/";
+                var filename = "";
+
+                do
+                {
+                    filename = Path.GetRandomFileName() + ".jpg";
+                } while (System.IO.File.Exists(Server.MapPath("~" + filepath) + filename));
+
+                model.ImageFile.SaveAs(Server.MapPath("~" + filepath) + filename);
+                photoPath = filepath + filename;
+            }
+
+            if (model.NewPassword != null)
+            {
+                if (model.NewPassword.Length < 8 || model.NewPassword.Length >= 50)
+                {
+                    ModelState.AddModelError("NewPassword", "Välj ett nytt lösenord, minst 8 bokstäver.");
+                    return View(model);
+                }
+            }
+
+            var currentUser = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            currentUser.UserData.Nickname = model.Nickname;
+            currentUser.Profile.FirstName = model.Firstname;
+            currentUser.Profile.LastName = model.Lastname;
+            currentUser.UserData.Location = new Location { Country = "Sweden", City = model.City };
+            currentUser.UserData.Gender = model.Gender;
+            currentUser.UserData.LookingFor = model.LookingFor;
+            currentUser.UserData.Description = model.Description;
+            currentUser.UserName = model.Email;
+
+            if (!photoPath.Equals(""))
+                currentUser.UserData.PhotoPath = photoPath;
+
+            if (model.NewPassword != null)
+                currentUser.PasswordHash = Startup.UserManagerFactory.Invoke().PasswordHasher.HashPassword(model.NewPassword);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

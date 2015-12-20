@@ -8,7 +8,7 @@ namespace DateMe.ViewModels.Api
 {
     public class UserDto
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Nickname { get; set; }
         public string Description { get; set; }
         public string City { get; set; }
@@ -19,7 +19,7 @@ namespace DateMe.ViewModels.Api
 
         public UserDto(AppUser user)
         {
-            Id = user.UserData.UserId;
+            Id = user.Id;
             Nickname = user.UserData.Nickname;
             Description = user.UserData.Description;
             City = user.UserData.Location.City;

@@ -138,7 +138,7 @@ namespace DateMe.ViewModels
 
         [Required]
         [StringLength(50, MinimumLength = 8)]
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
     }
 }
