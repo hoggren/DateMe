@@ -48,6 +48,7 @@ namespace DateMe.Controllers
         public ActionResult Edit()
         {
             var currentUser = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             var model = new ProfileEditViewModel
             {
                 Nickname = currentUser.UserData.Nickname,

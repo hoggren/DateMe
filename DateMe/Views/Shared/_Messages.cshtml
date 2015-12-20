@@ -1,0 +1,15 @@
+﻿@model DateMe.ViewModels.ProfileViewModel
+
+<h3>Meddelanden</h3>
+@if (Model.Messages != null)
+{
+    foreach (var message in Model.Messages)
+    {
+        <div class="row" id="wall_message">
+            <article>
+                @message.Text
+            </article>
+            <small>From: <a href="#">@message.From.UserData.Nickname</a></small>
+        </div>
+    }
+}

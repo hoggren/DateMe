@@ -6,13 +6,13 @@ using Models.Models;
 
 namespace DateMe.ViewModels
 {
-    public class WallViewModel
+    public class MessagesViewModel
     {
         public List<Message> Messages { get; set; }
 
-        public WallViewModel(Wall wall)
+        public MessagesViewModel(List<Message> messages)
         {
-            Messages = wall;
+            Messages = messages;
         }
     }
 }

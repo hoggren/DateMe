@@ -11,7 +11,9 @@ namespace Models.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid WallId { get; set; }
+        public Guid MessageId { get; set; }
+        public virtual Profile Profile { get; set; }
         public string Text { get; set; }
+        public virtual AppUser From { get;set; }
     }
 }

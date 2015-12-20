@@ -27,12 +27,18 @@ $(function () {
 
     $("#NicknameQuery").keyup(function () {
         if ($(this).val().length > 0) {
+            $("#ajax-loader").removeClass("hidden");
+
             $.getJSON("/Api/Users/", { query: $(this).val() }, function (data) {
                 vm.result(data);
-                console.log(data);
+                $("#ajax-loader").addClass("hidden");
             });
         } else {
             vm.result([]);
         }
+    });
+
+    $(window).bind("pageshow", function () {
+        $("#NicknameQuery").val("");
     });
 });

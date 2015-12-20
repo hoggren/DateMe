@@ -174,6 +174,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\MessagesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -185,17 +186,19 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Api\MessageDto.cs" />
     <Compile Include="ViewModels\Api\UserDto.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
-    <Compile Include="ViewModels\WallViewModel.cs" />
+    <Compile Include="ViewModels\MessagesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\ajax-loader.gif" />
     <Content Include="Content\Images\example_sexy.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -226,7 +229,7 @@
     </Content>
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\U.cshtml" />
-    <Content Include="Views\Shared\_Wall.cshtml" />
+    <Content Include="Views\Shared\_Messages.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <None Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

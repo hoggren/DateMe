@@ -9,6 +9,11 @@ namespace Models.Models
 {
     public class Profile
     {
+        public Profile()
+        {
+            Messages = new List<Message>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ProfileId { get; set; }
@@ -19,6 +24,7 @@ namespace Models.Models
         public string LastName { get; set; }
 
         public virtual FriendsList FriendsList { get; set; }
-        public virtual Wall Wall { get; set; }
+
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

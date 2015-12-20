@@ -85,7 +85,7 @@ namespace DateMe.Controllers
             user.UserData = new UserData 
             {
                 Nickname = model.Nickname,
-                PhotoPath = "",
+                PhotoPath = "/Content/Images/example_sexy.png",
                 Description = "",
                 DateOfBirth = new DateTime(1984, 3, 23),
                 Gender = model.Gender,
@@ -105,14 +105,11 @@ namespace DateMe.Controllers
                 
             };
 
-            user.UserData.Interests = new List<Interest>();
-            user.Profile.Wall = new Wall
-            {
-                new Message {Text="I love you!!!"},
-                new Message {Text="I hate you so much righht now"},
-                new Message {Text="Thanks for the wonderful hot date with lots of great sex"}
-            };
             user.Profile.FriendsList = new FriendsList();
+            user.UserData.Interests = new List<Interest>();
+            user.Profile.Messages = new List<Message>();
+
+            user.Profile.Messages.Add(new Message { Text = "KUKEN", From = user });
 
             try
             {
