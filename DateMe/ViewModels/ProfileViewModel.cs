@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mail;
 using Models.Models;
 
 namespace DateMe.ViewModels
@@ -10,6 +11,7 @@ namespace DateMe.ViewModels
     {
         private AppUser _user;
 
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
         public string LookingFor { get; set; }
@@ -26,9 +28,10 @@ namespace DateMe.ViewModels
             var profile = user.Profile;
             var userData = user.UserData;
 
+            Id = user.Id;
             Name = $"{profile.FirstName} {profile.LastName}";
-            Gender = userData.Gender;
-            LookingFor = userData.LookingFor;
+            Gender = userData.Gender == "Male" ? "Man" : "Woman";
+            LookingFor = userData.LookingFor == "Male" ? "men" : "women";
             Nickname = userData.Nickname;
             Location = userData.Location;
             Description = userData.Description;

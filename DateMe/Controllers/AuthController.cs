@@ -76,7 +76,7 @@ namespace DateMe.Controllers
 
             if (!ModelState.IsValid)
                 return View(new RegisterViewModel());
-
+            #region usercreation
             var user = new AppUser
             {
                 UserName = model.Email
@@ -86,7 +86,15 @@ namespace DateMe.Controllers
             {
                 Nickname = model.Nickname,
                 PhotoPath = "/Content/Images/example_sexy.png",
-                Description = "",
+                Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam " +
+                              "rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt " +
+                              "explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia " +
+                              "consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui " +
+                              "dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora " +
+                              "incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum " +
+                              "exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem " +
+                              "vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui " +
+                              "dolorem eum fugiat quo voluptas nulla pariatur?",
                 DateOfBirth = new DateTime(1984, 3, 23),
                 Gender = model.Gender,
                 LookingFor = model.LookingFor
@@ -109,7 +117,23 @@ namespace DateMe.Controllers
             user.UserData.Interests = new List<Interest>();
             user.Profile.Messages = new List<Message>();
 
-            user.Profile.Messages.Add(new Message { Text = "KUKEN", From = user });
+            user.Profile.Messages.Add(new Message
+            {
+                Text = "hi there, i would love to make a date ASAP, u are so beautiful!!",
+                From = user
+            });
+            user.Profile.Messages.Add(new Message
+            {
+                Text = "Thanks for last night!! ;) tihi",
+                From = user
+            });
+            user.Profile.Messages.Add(new Message
+            {
+                Text = "Wow.. Is that really your snot hanging from the nose or is it slime from the toy store??",
+                From = user
+            });
+
+            #endregion usercreation
 
             try
             {

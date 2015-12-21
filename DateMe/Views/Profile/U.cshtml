@@ -1,7 +1,59 @@
-﻿
+﻿@using DateMe.ViewModels
+@model DateMe.ViewModels.ProfileViewModel
+
 @{
-    ViewBag.Title = "Specific";
+    ViewBag.Title = @Model.Nickname + "'s profile";
 }
 
-<h2>Specific</h2>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="profile_bold">
+            @Model.Nickname (@Model.Location.City, @Model.Location.Country)
+        </h2>
+        <h4>
+            @Model.Age year old @Model.Gender.ToLower() looking for @Model.LookingFor
+        </h4>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="../../Content/Images/example_sexy.png" alt="@Model.Nickname's Profile Picture" id="profile_picture" />
+    </div>
+
+    <div class="col-md-9">
+        <h4 class="profile_bold">Description</h4>
+
+        <p id="profile_description">
+            @Model.Description
+        </p>
+
+        <hr/>
+        
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Css/profile.css")" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script src="/Scripts/Knockout/messageviewmodel.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

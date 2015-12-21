@@ -1,15 +1,17 @@
 ﻿@model DateMe.ViewModels.ProfileViewModel
 
-<h3>Meddelanden</h3>
-@if (Model.Messages != null)
-{
-    foreach (var message in Model.Messages)
-    {
-        <div class="row" id="wall_message">
-            <article>
-                @message.Text
-            </article>
-            <small>From: <a href="#">@message.From.UserData.Nickname</a></small>
-        </div>
-    }
-}
+<h4 class="profile_bold">Your messages</h4>
+
+<div data-bind="foreach: messages">
+
+    <div class="wall_message">
+
+        <span class="wall_message_from">From: <a href="#" data-bind="text: FromId, attr"></a></span>
+
+        <img class="wall_message_trash pull-right" src="~/Content/Images/glyphicons-17-bin.png" alt="X"/>
+
+        <article class="wall_message_text" data-bind="text: Text"></article>
+
+    </div>
+
+</div>

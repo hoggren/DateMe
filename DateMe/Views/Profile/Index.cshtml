@@ -4,46 +4,53 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="row">
-    <div class="col-md.12">
-        <div class="row">
-            <h2>@Model.Nickname (@Model.Gender.Substring(0, 1)@Model.Age, @Model.Location.City) <small>@Html.ActionLink("Edit","Edit","Profile", new { @class = "btn btn-default btn-sm" })</small></h2>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <h4>
-                    @Model.Gender looking for @Model.LookingFor.ToLower()
-                </h4>
-            </div>
-            <div class="col-md-5">
-                <h3>
-                    Who is @Model.Nickname?
-                </h3>
-            </div>
-        </div>
-    </div>
+    <div class="col-md-12">
+        <h2 class="profile_bold">
+            @Model.Nickname (@Model.Location.City, @Model.Location.Country)
+        </h2>
+        <h4>
+            @Model.Age year old @Model.Gender.ToLower() looking for @Model.LookingFor
+        </h4>
+        <hr/>
+    </div>  
 </div>
 
 <div class="row">
     <div class="col-md-3">
-        <img src="@Model.PhotoPath" class="img-responsive"/> <br />
+        <img src="../../Content/Images/example_sexy.png" alt="@Model.Nickname's Profile Picture" id="profile_picture"/>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <small>@Html.ActionLink("Edit profile", "Edit", "Profile", new {@class = "btn btn-default btn-sm"})</small>
+        }
     </div>
-    <div class="col-md-8">
-        <div class="row">
-            <p>
-                @Model.Description
-            </p>
-            <p>
-                Travel, surprises, music, dancing, sports, books, last minute plans, open mind, photography, museum, craziness, spontaneity,
-                going out (but also staying in), sharing, simplicity, respect, flip flops (yes, the sandals), down to earth (however fantasy
-                is also very important), people, casual, word, news, work, sense of humor about yourself, awareness.
-            </p>
-        </div>
-        <div class="row">
-            @{ Html.RenderPartial("~/Views/Shared/_Messages.cshtml"); }
-        </div>
+
+    <div class="col-md-9">
+        <h4 class="profile_bold">Description</h4>
+
+        <p id="profile_description">
+            @(Model.Description.Length < 300 ? Model.Description : Model.Description.Substring(0, 200))...
+            @Html.ActionLink("Edit", "Edit", "Profile")
+        </p>
+
+        <hr/>
+        @{ Html.RenderPartial("~/Views/Shared/_Messages.cshtml");}
+
     </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="@Url.Content("~/Content/Css/profile.css")" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script src="/Scripts/Knockout/messageviewmodel.js"></script>
+}
+
+
 
 
 
