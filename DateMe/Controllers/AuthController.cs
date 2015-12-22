@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DateMe.ViewModels;
 using Microsoft.AspNet.Identity;
 using Models.Models;
+using DateMe.Functions;
 
 namespace DateMe.Controllers
 {
@@ -76,6 +77,19 @@ namespace DateMe.Controllers
 
             if (!ModelState.IsValid)
                 return View(new RegisterViewModel());
+
+            if(!UserUtilities.UniqueEmail(model.Email))
+            {
+                ModelState.AddModelError("Email", "Email is already registered.");
+                return View(model);
+            }
+
+            if (!UserUtilities.UniqueNickName(model.Nickname))
+            {
+                ModelState.AddModelError("Nickname", "Nickname is already registered.");
+                return View(model);
+            }
+
             #region usercreation
             var user = new AppUser
             {
@@ -116,23 +130,7 @@ namespace DateMe.Controllers
             user.Profile.FriendsList = new FriendsList();
             user.UserData.Interests = new List<Interest>();
             user.Profile.Messages = new List<Message>();
-            /*
-            user.Profile.Messages.Add(new Message
-            {
-                Text = "hi there, i would love to make a date ASAP, u are so beautiful!!",
-                From = user
-            });
-            user.Profile.Messages.Add(new Message
-            {
-                Text = "Thanks for last night!! ;) tihi",
-                From = user
-            });
-            user.Profile.Messages.Add(new Message
-            {
-                Text = "Wow.. Is that really your snot hanging from the nose or is it slime from the toy store??",
-                From = user
-            });
-            */
+
             #endregion usercreation
 
             try

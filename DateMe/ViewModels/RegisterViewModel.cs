@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -81,6 +82,7 @@ namespace DateMe.ViewModels
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
+        [RegularExpression("^([a-zA-ZåäöÅÄÖ0-9_-])+$")]
         public string Nickname { get; set; }
 
         [Required]
