@@ -116,7 +116,7 @@ namespace DateMe.Controllers
             user.Profile.FriendsList = new FriendsList();
             user.UserData.Interests = new List<Interest>();
             user.Profile.Messages = new List<Message>();
-
+            /*
             user.Profile.Messages.Add(new Message
             {
                 Text = "hi there, i would love to make a date ASAP, u are so beautiful!!",
@@ -132,7 +132,7 @@ namespace DateMe.Controllers
                 Text = "Wow.. Is that really your snot hanging from the nose or is it slime from the toy store??",
                 From = user
             });
-
+            */
             #endregion usercreation
 
             try

@@ -21,7 +21,9 @@ namespace DateMe.Controllers.Api
             {
                 Id = message.MessageId.ToString(),
                 Text = message.Text,
-                FromId = message.From.Id
+                FromId = message.From.Id,
+                FromNickName = message.From.UserData.Nickname,
+                Sent = message.Sent
             };
 
         // GET: api/Messages
@@ -41,35 +43,30 @@ namespace DateMe.Controllers.Api
             return messages;
         }
 
-        // GET: api/Messages/{id}
+        // POST: api/Messages/{toUserId}
         [ResponseType(typeof(Message))]
-        public IQueryable<Message> GetMessages(string id)
-        {
-            var user = db.Users.Find(id);
-
-            if (user == null)
-            {
-                return db.Messages.Where(m => m.MessageId == new Guid());
-            }
-
-            var messages = db.Messages.Where(m => m.Profile.ProfileId == user.Profile.ProfileId);
-
-            return messages;
-        }
-
-        // POST: api/Messages
-        [ResponseType(typeof(Message))]
-        public IHttpActionResult PostMessage(Message message)
+        public IHttpActionResult PostMessage(Message message, string toUserId)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
+            
+            var toUser = db.Users.Find(toUserId);
+
+            if (toUser == null)
+            {
+                return NotFound();
+            }
+
+            message.From = db.Users.Find(User.Identity.GetUserId());
+            message.Profile = toUser.Profile;
+            message.Sent = DateTime.Now;
 
             db.Messages.Add(message);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = message.Profile.ProfileId }, message);
+            return Ok();
         }
 
         // DELETE: api/Messages/5

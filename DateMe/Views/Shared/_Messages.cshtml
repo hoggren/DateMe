@@ -6,7 +6,7 @@
 
     <div class="wall_message">
 
-        <span class="wall_message_from">From: <a href="#" data-bind="text: FromId, attr"></a></span>
+        <span class="wall_message_from">From: <a href="#" data-bind="text: FromNickName, attr: { href: '/Profile/U/' + FromId }"></a> - <span data-bind="text: $parent.toRelativeTime(Sent)"></span></span>
 
         <img class="wall_message_trash pull-right" src="~/Content/Images/glyphicons-17-bin.png" alt="X"/>
 

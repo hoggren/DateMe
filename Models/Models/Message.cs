@@ -13,7 +13,10 @@ namespace Models.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid MessageId { get; set; }
         public virtual Profile Profile { get; set; }
+        [Required]
+        [StringLength(512, MinimumLength = 2)]
         public string Text { get; set; }
+        public DateTime Sent { get; set; }
         public virtual AppUser From { get;set; }
     }
 }

@@ -10,7 +10,8 @@ namespace DateMe.ViewModels.Api
         public string Id { get; set; }
         public string Text { get; set; }
         public string FromId { get; set; }
-
+        public string FromNickName { get; set; }
+        public DateTime Sent { get; set; }
         public MessageDto() { }
 
     }
