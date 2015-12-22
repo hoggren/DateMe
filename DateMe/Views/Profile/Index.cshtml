@@ -1,4 +1,6 @@
-﻿@using DateMe.ViewModels
+﻿@using Microsoft.AspNet.Identity
+@using DateMe.ViewModels
+
 @model DateMe.ViewModels.ProfileViewModel
 
 @{
@@ -24,6 +26,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <small>@Html.ActionLink("Edit profile", "Edit", "Profile", new {@class = "btn btn-default btn-sm"})</small>
+            <small><a href="/Profile/U/@User.Identity.GetUserId()" class="btn btn-default btn-sm">View as other user</a></small>
         }
     </div>
 

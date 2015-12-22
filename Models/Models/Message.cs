@@ -17,6 +17,7 @@ namespace Models.Models
         [StringLength(512, MinimumLength = 2)]
         public string Text { get; set; }
         public DateTime Sent { get; set; }
+        public bool Read { get; set; }
         public virtual AppUser From { get;set; }
     }
 }

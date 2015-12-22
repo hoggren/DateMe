@@ -14,5 +14,6 @@ $(function() {
 
     $.getJSON("/Api/Messages/", function (data) {
         vm.messages(data);
+        vm.messages.reverse();
     });
 });

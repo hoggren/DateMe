@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using DateMe.Functions
+
+@{ 
+    var newMessageCount = UserUtilities.NewMessageCount();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,7 +14,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" id="top-nav">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,20 +29,31 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Profile", "Index", "Profile")</li>
+                        <li><a href="@Url.Action("Index", "Profile")">Profile 
+                            @if (newMessageCount > 0)
+                            {
+                                <span class="badge">@newMessageCount</span>
+                            }
+                        </a></li>
+                        <li><a href="@Url.Action("Friends", "Profile")">Friends 
+                            
+                            <span class="badge">2</span>
+                            
+                        </a></li>
                         <li>@Html.ActionLink("Search", "Index", "Search")</li>
-                        <li>@Html.ActionLink("Super-Match!","Index","Supermatch")</li>
-                        
+                        <li>@Html.ActionLink("Super-Match!", "Index", "Supermatch")</li>
+
                     }
                     else
                     {
                         <li>
                             @Html.ActionLink("Register", "Register", "Auth")
                         </li>
-                            <li>
-                                @Html.ActionLink("Login", "Login", "Auth")
-                            </li>
+                        <li>
+                            @Html.ActionLink("Login", "Login", "Auth")
+                        </li>
                     }
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>

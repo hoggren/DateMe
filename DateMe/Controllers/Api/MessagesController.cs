@@ -62,6 +62,7 @@ namespace DateMe.Controllers.Api
             message.From = db.Users.Find(User.Identity.GetUserId());
             message.Profile = toUser.Profile;
             message.Sent = DateTime.Now;
+            message.Read = false;
 
             db.Messages.Add(message);
             db.SaveChanges();

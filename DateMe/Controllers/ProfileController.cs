@@ -9,6 +9,8 @@ using Models.Context;
 using Models.Models;
 using System.IO;
 
+using DateMe.Functions;
+
 namespace DateMe.Controllers
 {
     public class ProfileController : BaseController
@@ -18,6 +20,8 @@ namespace DateMe.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            UserUtilities.ResetMessageCount();
+
             var currentUser = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
             if (User.Identity.IsAuthenticated)
             {
