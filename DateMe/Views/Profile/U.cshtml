@@ -13,6 +13,7 @@
         <h4>
             @Model.Age year old @Model.Gender.ToLower() looking for @Model.LookingFor
         </h4>
+
         <hr />
     </div>
 </div>
@@ -23,6 +24,19 @@
     </div>
 
     <div class="col-md-9">
+        <div class="row">
+            <h4 class="profile_bold">Send a message to @Model.Nickname</h4>
+
+            <form>
+                <input value="@Model.Id" type="hidden" id="toUserId"/>
+                <textarea class="form-control" id="message_text"></textarea>
+                <button data-bind="click: sendMessage" type="submit" id="message_send" class="btn btn-sm">Send</button>
+            </form>
+            <p id="message_status"></p>
+        </div>
+
+        <hr/>
+
         <h4 class="profile_bold">Description</h4>
 
         <p id="profile_description">
@@ -30,7 +44,8 @@
         </p>
 
         <hr/>
-        
+
+        @{ Html.RenderPartial("~/Views/Shared/_Interests.cshtml");}
     </div>
 </div>
 

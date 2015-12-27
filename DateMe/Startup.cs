@@ -18,6 +18,7 @@ namespace DateMe
 
         public void Configuration(IAppBuilder app)
         {
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

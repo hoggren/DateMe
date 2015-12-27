@@ -21,6 +21,7 @@ namespace DateMe.ViewModels
         public int Age { get; set; }
         public string PhotoPath { get; set; }
         public List<Message> Messages { get; set; }
+        public List<Interest> Interests { get; set; }
 
         public ProfileViewModel(AppUser user)
         {
@@ -38,6 +39,7 @@ namespace DateMe.ViewModels
             Age = DateTime.Today.Year - userData.DateOfBirth.Year;
             PhotoPath = userData.PhotoPath;
             Messages = profile.Messages as List<Message>;
+            Interests = userData.Interests.ToList();
         }
     }
 

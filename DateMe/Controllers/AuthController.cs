@@ -128,7 +128,18 @@ namespace DateMe.Controllers
             };
 
             user.Profile.FriendsList = new FriendsList();
-            user.UserData.Interests = new List<Interest>();
+            user.UserData.Interests = new List<Interest>()
+            {
+                new Interest() { Title = "Pizza" },
+                new Interest() { Title = "Fotboll" },
+                new Interest() { Title = "Dans" },
+                new Interest() { Title = "Kristendom" },
+                new Interest() { Title = "Hundar" },
+                new Interest() { Title = "Katter" },
+                new Interest() { Title = "Spela fiol" },
+                new Interest() { Title = "Knulla" },
+                new Interest() { Title = "Cancer" }
+            };
             user.Profile.Messages = new List<Message>();
 
             #endregion usercreation

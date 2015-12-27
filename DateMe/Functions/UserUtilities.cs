@@ -17,7 +17,7 @@ namespace DateMe.Functions
                         where u.UserData.Nickname == nickname
                         select u);
 
-            if (user.Count() == 0)
+            if (!user.Any())
             {
                 return true;
             }
@@ -34,7 +34,7 @@ namespace DateMe.Functions
                         where u.UserName == email
                         select u);
 
-            if (user.Count() == 0)
+            if (!user.Any())
             {
                 return true;
             }

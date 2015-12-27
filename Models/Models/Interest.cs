@@ -18,5 +18,7 @@ namespace Models.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid InterestId { get; set; }
         public ICollection<UserData> Interested { get; set; }
+
+        public string Title { get; set; }
     }
 }

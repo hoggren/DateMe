@@ -1,19 +1,17 @@
 ﻿@model DateMe.ViewModels.ProfileViewModel
 
-<h4 class="profile_bold">Your messages</h4>
+<h4 class="profile_bold">Messages</h4>
 
 <div data-bind="visible: messages().length == 0">
-    <span>No messages :(</span>
+    <span>No messages</span>
 </div>
 
 <div data-bind="foreach: messages">
 
-    <div class="wall_message">
+    <div class="wall_message" data-bind="visible: $index() < 10">
 
         <span class="wall_message_from">From: <a href="#" data-bind="text: FromNickName, attr: { href: '/Profile/U/' + FromId }"></a> - <span data-bind="text: $parent.toRelativeTime(Sent)"></span></span>
-
-        <img class="wall_message_trash pull-right" src="~/Content/Images/glyphicons-17-bin.png" alt="X"/>
-
+        <img data-bind="click: $parent.removeMessage" class="wall_message_trash pull-right" src="~/Content/Images/glyphicons-17-bin.png" alt="X"/>
         <article class="wall_message_text" data-bind="text: Text"></article>
 
     </div>

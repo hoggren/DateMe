@@ -31,16 +31,19 @@
     </div>
 
     <div class="col-md-9">
-        <h4 class="profile_bold">Description</h4>
 
+        @{ Html.RenderPartial("~/Views/Shared/_Messages.cshtml");}
+        <hr />
+
+        <h4 class="profile_bold">Description</h4>
         <p id="profile_description">
             @(Model.Description.Length < 300 ? Model.Description : Model.Description.Substring(0, 200))...
             @Html.ActionLink("Edit", "Edit", "Profile")
         </p>
 
         <hr/>
-        @{ Html.RenderPartial("~/Views/Shared/_Messages.cshtml");}
 
+        @{ Html.RenderPartial("~/Views/Shared/_Interests.cshtml");}
     </div>
 </div>
 

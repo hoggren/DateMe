@@ -4,6 +4,8 @@
     margin-bottom: 5px;
     padding: 3px;
     border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 .wall_message_from {
@@ -30,6 +32,16 @@
 
 .profile_bold {
     font-weight: bold;
+}
+
+.profile_interest {
+    background-color: rgb(230, 230, 230);
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    display: inline;
+    padding: 5px;
+    margin: 5px;
 }
 
 
