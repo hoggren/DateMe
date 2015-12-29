@@ -54,7 +54,7 @@ namespace DateMe.Controllers.Api
             
             var toUser = db.Users.Find(toUserId);
 
-            if (toUser == null)
+            if (toUser == null || message == null)
             {
                 return NotFound();
             }

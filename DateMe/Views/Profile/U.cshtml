@@ -24,16 +24,14 @@
     </div>
 
     <div class="col-md-9">
-        <div class="row">
-            <h4 class="profile_bold">Send a message to @Model.Nickname</h4>
 
-            <form>
-                <input value="@Model.Id" type="hidden" id="toUserId"/>
-                <textarea class="form-control" id="message_text"></textarea>
-                <button data-bind="click: sendMessage" type="submit" id="message_send" class="btn btn-sm">Send</button>
+            <h4 class="profile_bold" id="send-message-title">Send a message to @Model.Nickname</h4>
+
+            <form id="send-message-form">
+                <textarea class="form-control" id="message_text" data-bind="value: messageText"></textarea>
+                <button data-bind="click: function() { sendMessage('@Model.Id') }" type="button" id="message_send1" class="btn btn-sm">Send</button>
             </form>
             <p id="message_status"></p>
-        </div>
 
         <hr/>
 
