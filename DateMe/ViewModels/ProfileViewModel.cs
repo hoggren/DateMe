@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mail;
+using DateMe.Functions;
 using Models.Models;
 
 namespace DateMe.ViewModels
@@ -36,7 +37,7 @@ namespace DateMe.ViewModels
             Nickname = userData.Nickname;
             Location = userData.Location;
             Description = userData.Description;
-            Age = DateTime.Today.Year - userData.DateOfBirth.Year;
+            Age = UserUtilities.DateToAge(userData.DateOfBirth);
             PhotoPath = userData.PhotoPath;
             Messages = profile.Messages as List<Message>;
             Interests = userData.Interests.ToList();

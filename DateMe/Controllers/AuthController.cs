@@ -93,6 +93,7 @@ namespace DateMe.Controllers
             #region usercreation
             var user = new AppUser
             {
+                Active = true,
                 UserName = model.Email
             };
 

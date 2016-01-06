@@ -9,7 +9,7 @@ namespace Models.Context
 
         public AppDbContext() : base("DefaultConnection")
         {
-            
+           Database.SetInitializer(new AppDbInitializer());
         }
 
         public DbSet<Profile> Profiles { get; set; }

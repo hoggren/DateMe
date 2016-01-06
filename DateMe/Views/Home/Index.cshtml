@@ -1,11 +1,29 @@
-﻿@{
+﻿@using DateMe.Functions
+@model DateMe.ViewModels.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Welcome</h1>
     <p class="lead">DateMe&trade; is the world's leading venue for singles looking to pork oh so hard</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>
+    </p>
+</div>
+
+<div class="row-centered">
+    @foreach (var u in Model.ExampleUsers)
+    {
+        <div class="col-md-2 col-centered">
+            <p style="font-weight: bold; margin: 0;">@u.UserData.Nickname</p>
+            <p style="margin: 0;">@u.UserData.Gender.Substring(0, 1)@UserUtilities.DateToAge(u.UserData.DateOfBirth), @u.UserData.Location.City</p>
+
+            <a href="@(Url.Action("Register", "Auth"))">
+                <img src="@u.UserData.PhotoPath" height="120"/>
+            </a>
+
+        </div>
+    }
 </div>
 
 <div class="row">
