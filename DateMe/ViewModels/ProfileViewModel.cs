@@ -32,8 +32,13 @@ namespace DateMe.ViewModels
 
             Id = user.Id;
             Name = $"{profile.FirstName} {profile.LastName}";
-            Gender = userData.Gender == "Male" ? "Man" : "Woman";
-            LookingFor = userData.LookingFor == "Male" ? "men" : "women";
+
+            if (userData.Gender.Equals("Male")) Gender = "Man";
+            else if (userData.Gender.Equals("Female")) Gender = "Woman";
+            if (userData.LookingFor.Equals("Male")) LookingFor = "men";
+            else if (userData.LookingFor.Equals("Female")) LookingFor = "women";
+            else LookingFor = "other";
+
             Nickname = userData.Nickname;
             Location = userData.Location;
             Description = userData.Description;
