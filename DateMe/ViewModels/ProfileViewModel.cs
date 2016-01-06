@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mail;
 using DateMe.Functions;
@@ -22,7 +23,6 @@ namespace DateMe.ViewModels
         public int Age { get; set; }
         public string PhotoPath { get; set; }
         public List<Message> Messages { get; set; }
-        public List<Interest> Interests { get; set; }
 
         public ProfileViewModel(AppUser user)
         {
@@ -40,7 +40,6 @@ namespace DateMe.ViewModels
             Age = UserUtilities.DateToAge(userData.DateOfBirth);
             PhotoPath = userData.PhotoPath;
             Messages = profile.Messages as List<Message>;
-            Interests = userData.Interests.ToList();
         }
     }
 

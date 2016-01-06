@@ -13,7 +13,6 @@ namespace Models.Context
         }
 
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Interest> Interests { get; set; }
         public DbSet<Message> Messages { get; set; }
     }
 }

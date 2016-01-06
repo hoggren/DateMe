@@ -16,7 +16,7 @@ namespace DateMe
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<AppDbContext>());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

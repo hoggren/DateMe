@@ -13,6 +13,7 @@ namespace DateMe.ViewModels
     {
         public RegisterViewModel()
         {
+            BirthDate = DateTime.Now;
             Cities = new List<SelectListItem>();
 
             foreach(var city in _cities)
@@ -79,6 +80,10 @@ namespace DateMe.ViewModels
 
         public List<SelectListItem> Cities { get; set; }
         public List<SelectListItem> Genders { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]

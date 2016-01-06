@@ -21,5 +21,18 @@ namespace DateMe.Controllers
         {
             this.userManager = userManager;
         }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Exception e = filterContext.Exception;
+            filterContext.ExceptionHandled = true;
+           // var model = new HandleErrorInfo(filterContext.Exception, "Home", "Error");
+
+            filterContext.Result = new ViewResult
+            {
+                ViewName = "Error",
+                ViewData = new ViewDataDictionary(e)
+            };
+        }
     }
 }

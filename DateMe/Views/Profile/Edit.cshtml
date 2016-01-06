@@ -61,10 +61,17 @@
     </div>
 
     <div class="form-group">
+        <label for="Visible">Visible on search?</label>
+        @Html.EditorFor(m => m.Visible)
+    </div>
+
+    <div class="form-group">
         <label for="NewPassword">New password (optional)</label>
-        @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+        @Html.PasswordFor(m => m.NewPassword, new {@class = "form-control"})
         @Html.ValidationMessageFor(m => m.NewPassword)
     </div>
+
+    <button type="button" class="btn btn-danger" id="btn-delete-profile">Delete profile</button>
 
     <p></p>
 
@@ -73,4 +80,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="/Scripts/Other/modal-confirm.js"></script>
+    <script>
+        $("#btn-delete-profile").click(function() {
+            modalConfirm(function() {
+                window.location = "/Profile/Delete";
+            });
+        });
+    </script>
 }

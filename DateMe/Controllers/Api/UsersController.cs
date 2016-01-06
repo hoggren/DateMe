@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using System.Linq.Expressions;
 using System;
 using System.Data.Entity;
+using System.Web.Mvc.Html;
 
 namespace DateMe.Controllers.Api
 {
@@ -33,7 +34,12 @@ namespace DateMe.Controllers.Api
 
         public IQueryable<UserDto> GetAppusers(string query)
         {
-            return db.Users.Where(u => u.UserData.Nickname.Contains(query)).Select(AsUserDto);
+            return (from u in db.Users
+                where u.UserData.Nickname.Contains(query)
+                      && u.Visible == true && u.Active == true
+                select u).Select(AsUserDto);
+
+            //return db.Users.Where(u => u.UserData.Nickname.Contains(query)).Select(AsUserDto);
         }
 
         [ResponseType(typeof(UserDto))]
@@ -54,6 +60,7 @@ namespace DateMe.Controllers.Api
                     user = Startup.UserManagerFactory.Invoke().FindById(id);
 
                     if (user == null)
+                    if (user.Active && user.Visible)
                     {
                         return NotFound();
                     }

@@ -23,13 +23,14 @@ namespace DateMe.Controllers
             UserUtilities.ResetMessageCount();
 
             var currentUser = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            if (User.Identity.IsAuthenticated)
+            
+            if (User.Identity.IsAuthenticated && currentUser != null)
             {
                 return View(new ProfileViewModel(currentUser));
             }
             else
             {
-                return RedirectToAction("Login", "Auth");
+                return RedirectToAction("Logout", "Auth");
             }
         }
 
@@ -63,10 +64,28 @@ namespace DateMe.Controllers
                 LookingFor = currentUser.UserData.LookingFor,
                 Description = currentUser.UserData.Description,
                 Email = currentUser.UserName,
-                Password = "NOPENOPENOPENOPE"
+                Password = "NOPENOPENOPENOPE",
+                Active = currentUser.Active,
+                Visible = currentUser.Visible
             };
 
             return View(model);
+        }
+
+        public ActionResult Delete()
+        {
+            var user = db.Users.Find(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            if (user != null)
+            {
+                user.Active = false;
+                var x = user.Profile.ProfileId;
+                x = user.UserData.UserId;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Logout","Auth");
         }
 
         [HttpPost]
@@ -121,6 +140,8 @@ namespace DateMe.Controllers
             currentUser.UserData.LookingFor = model.LookingFor;
             currentUser.UserData.Description = model.Description;
             currentUser.UserName = model.Email;
+            currentUser.Visible = model.Visible;
+            currentUser.Active = model.Active;
 
             if (!photoPath.Equals(""))
                 currentUser.UserData.PhotoPath = photoPath;

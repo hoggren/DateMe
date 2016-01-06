@@ -18,6 +18,7 @@ namespace DateMe.Controllers
         {
             var exampleUsers = (from u in _db.Users
                                 where u.Active == true
+                                orderby u.Id descending 
                                 select u).Take(5).ToList();
 
             return View(new HomeViewModel(exampleUsers));
@@ -29,5 +30,6 @@ namespace DateMe.Controllers
 
             return View();
         }
+
     }
 }

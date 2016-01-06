@@ -27,7 +27,5 @@ namespace Models.Models
         public string Description { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public virtual ICollection<Interest> Interests { get; set; }
-
     }
 }

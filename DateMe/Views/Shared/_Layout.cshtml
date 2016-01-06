@@ -49,14 +49,21 @@
                         <li>
                             @Html.ActionLink("Register", "Register", "Auth")
                         </li>
-                        <li>
-                            @Html.ActionLink("Login", "Login", "Auth")
-                        </li>
+
                     }
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink("Login", "Login", "Auth")
+                        </li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
             </div>

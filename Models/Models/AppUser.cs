@@ -11,8 +11,9 @@ namespace Models.Models
 {
     public class AppUser : IdentityUser
     {
-        [DefaultValue(true)]
         public bool Active { get; set; }
+
+        public bool Visible { get; set; }
         [Required]
         public virtual UserData UserData { get; set; }
         [Required]

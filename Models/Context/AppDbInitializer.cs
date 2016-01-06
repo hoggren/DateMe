@@ -10,44 +10,16 @@ using Models.Models;
 
 namespace Models.Context
 {
-    public class AppDbInitializer : DropCreateDatabaseAlways<AppDbContext>
+    public class AppDbInitializer : DropCreateDatabaseAlways<AppDbContext> //DropCreateDatabaseIfModelChanges<AppDbContext>
     {
         protected override void Seed(AppDbContext context)
         {
-            IList<Interest> defaultInterests = new List<Interest>();
-            #region interestCreation
-
-            defaultInterests.Add(new Interest { Title = "Toothpaste" });
-            defaultInterests.Add(new Interest { Title = "Doing taxes" });
-            defaultInterests.Add(new Interest { Title = "Moonshine" });
-            defaultInterests.Add(new Interest { Title = "Greed" });
-            defaultInterests.Add(new Interest { Title = "Hate" });
-            defaultInterests.Add(new Interest { Title = "Short circuits" });
-            defaultInterests.Add(new Interest { Title = "Pandemic" });
-            defaultInterests.Add(new Interest { Title = "Poison" });
-            defaultInterests.Add(new Interest { Title = "Prison" });
-            defaultInterests.Add(new Interest { Title = "Random interests" });
-            defaultInterests.Add(new Interest { Title = "Road rage" });
-            defaultInterests.Add(new Interest { Title = "Pornography" });
-            defaultInterests.Add(new Interest { Title = "Torture" });
-            defaultInterests.Add(new Interest { Title = "Flowers" });
-            defaultInterests.Add(new Interest { Title = "Disease" });
-            defaultInterests.Add(new Interest { Title = "Happiness" });
-            defaultInterests.Add(new Interest { Title = "Working hard" });
-            defaultInterests.Add(new Interest { Title = "Slavery" });
-            defaultInterests.Add(new Interest { Title = "Hitting too hard" });
-            defaultInterests.Add(new Interest { Title = "Cigarettes" });
-
-            #endregion
-
-            foreach (var i in defaultInterests)
-                context.Interests.Add(i);
-
             IList<AppUser> defaultUsers = new List<AppUser>();
             #region usercreation
             defaultUsers.Add(new AppUser
             {
                 Active = true,
+                Visible = true,
                 UserName = "klas@tarnstrom.se",
                 PasswordHash = new PasswordHasher().HashPassword("hejhejhej"),
 
@@ -64,8 +36,7 @@ namespace Models.Context
                                   "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat " +
                                   "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " +
                                   "deserunt mollit anim id est laborum.",
-                    DateOfBirth = new DateTime(1987, 5, 23),                  
-                    Interests = new List<Interest>()
+                    DateOfBirth = new DateTime(1987, 5, 23)                 
                 },
 
                 Profile = new Profile
@@ -81,6 +52,7 @@ namespace Models.Context
             defaultUsers.Add(new AppUser
             {
                 Active = true,
+                Visible = true,
                 UserName = "carljan@grythyttan.se",
                 PasswordHash = new PasswordHasher().HashPassword("hejhejhej"),
 
@@ -97,8 +69,7 @@ namespace Models.Context
                       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat " +
                       "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " +
                       "deserunt mollit anim id est laborum.",
-                    DateOfBirth = new DateTime(1946, 3, 22),
-                    Interests = new List<Interest>()
+                    DateOfBirth = new DateTime(1946, 3, 22)
                 },
 
                 Profile = new Profile
@@ -114,6 +85,7 @@ namespace Models.Context
             defaultUsers.Add(new AppUser
             {
                 Active = true,
+                Visible = true,
                 UserName = "tommy@pippi.com",
                 PasswordHash = new PasswordHasher().HashPassword("hejhejhej"),
 
@@ -130,8 +102,7 @@ namespace Models.Context
                       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat " +
                       "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " +
                       "deserunt mollit anim id est laborum.",
-                    DateOfBirth = new DateTime(1957, 10, 22),
-                    Interests = new List<Interest>()
+                    DateOfBirth = new DateTime(1957, 10, 22)
                 },
 
                 Profile = new Profile
@@ -147,6 +118,7 @@ namespace Models.Context
             defaultUsers.Add(new AppUser
             {
                 Active = true,
+                Visible = true,
                 UserName = "carlxvigustaf@kungahuset.gov",
                 PasswordHash = new PasswordHasher().HashPassword("hejhejhej"),
 
@@ -163,8 +135,7 @@ namespace Models.Context
                       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat " +
                       "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " +
                       "deserunt mollit anim id est laborum.",
-                    DateOfBirth = new DateTime(1946, 4, 30),
-                    Interests = new List<Interest>()
+                    DateOfBirth = new DateTime(1946, 4, 30)
                 },
 
                 Profile = new Profile
@@ -180,6 +151,7 @@ namespace Models.Context
             defaultUsers.Add(new AppUser
             {
                 Active = true,
+                Visible = true,
                 UserName = "narcotraficante49@hotmail.com",
                 PasswordHash = new PasswordHasher().HashPassword("hejhejhej"),
 
@@ -196,8 +168,7 @@ namespace Models.Context
                       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat " +
                       "nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " +
                       "deserunt mollit anim id est laborum.",
-                    DateOfBirth = new DateTime(1949, 12, 1),
-                    Interests = new List<Interest>()
+                    DateOfBirth = new DateTime(1949, 12, 1)
                 },
 
                 Profile = new Profile
@@ -210,6 +181,8 @@ namespace Models.Context
 
             });
 
+            #endregion
+
             using (var userManager = new UserManager<AppUser>(new UserStore<AppUser>(context)))
             {
                 foreach (var u in defaultUsers)
@@ -218,11 +191,6 @@ namespace Models.Context
                     userManager.Create(u);
                 }
             }
-
-            #endregion
-
-
-
 
             base.Seed(context);
             

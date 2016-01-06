@@ -134,7 +134,6 @@
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\FriendsList.cs" />
     <Compile Include="Models\IModel.cs" />
-    <Compile Include="Models\Interest.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Profile.cs" />

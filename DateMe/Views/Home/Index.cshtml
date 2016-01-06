@@ -12,18 +12,28 @@
 </div>
 
 <div class="row-centered">
+    <div class="col-md-1"></div>
     @foreach (var u in Model.ExampleUsers)
     {
         <div class="col-md-2 col-centered">
             <p style="font-weight: bold; margin: 0;">@u.UserData.Nickname</p>
             <p style="margin: 0;">@u.UserData.Gender.Substring(0, 1)@UserUtilities.DateToAge(u.UserData.DateOfBirth), @u.UserData.Location.City</p>
 
-            <a href="@(Url.Action("Register", "Auth"))">
-                <img src="@u.UserData.PhotoPath" height="120"/>
+            @if (@User.Identity.IsAuthenticated) {
+            <a href="@(Url.Action("U", "Profile", new { id = @u.Id }))">
+                <img src="@u.UserData.PhotoPath" height="120" />                
             </a>
+            } else {
+            <a href="@(Url.Action("Register", "Auth"))">
+                <img src="@u.UserData.PhotoPath" height="120" />
+            </a>
+            }
+
+
 
         </div>
     }
+    <div class="col-md-1"></div>
 </div>
 
 <div class="row">

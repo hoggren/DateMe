@@ -16,17 +16,19 @@
         });
     }
 
-    self.removeMessage = function(message) {
-        $.ajax({
-            type: "DELETE",
-            url: "/api/messages/" + message.Id,
-            contentType: "application/json",
-            success: function () {
-                self.messages.remove(message);
-            },
-            error: function () {
-                alert("Det gick inte att ta bort detta meddelande");
-            }
+    self.removeMessage = function (message) {
+        modalConfirm(function() {
+            $.ajax({
+                type: "DELETE",
+                url: "/api/messages/" + message.Id,
+                contentType: "application/json",
+                success: function () {
+                    self.messages.remove(message);
+                },
+                error: function () {
+                    alert("Det gick inte att ta bort detta meddelande");
+                }
+            });
         });
     }
 }
