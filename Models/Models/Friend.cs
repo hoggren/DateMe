@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Models.Models
 {
-    public class FriendsList : List<AppUser>, IModel
+    public class Friend
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public virtual Profile Profile { get; set; }
+
+        public virtual AppUser AppUser { get; set; }
+        public String Category { get; set; }
+        public bool Confirmed { get; set; }
     }
 }

@@ -43,10 +43,8 @@ namespace Models.Context
                 {
                     FirstName = "Klas",
                     LastName = "Tärnström",
-                    FriendsList = new FriendsList(),
-                    Messages = new List<Message>()
+                    Messages = new List<Message>(),
                 }
-
             });
 
             defaultUsers.Add(new AppUser
@@ -76,7 +74,6 @@ namespace Models.Context
                 {
                     FirstName = "Carl Jan",
                     LastName = "Granqvist",
-                    FriendsList = new FriendsList(),
                     Messages = new List<Message>()
                 }
 
@@ -109,7 +106,6 @@ namespace Models.Context
                 {
                     FirstName = "Tommy",
                     LastName = "Enigma",
-                    FriendsList = new FriendsList(),
                     Messages = new List<Message>()
                 }
 
@@ -142,7 +138,6 @@ namespace Models.Context
                 {
                     FirstName = "Carl Gustaf",
                     LastName = "Bernadotte",
-                    FriendsList = new FriendsList(),
                     Messages = new List<Message>()
                 }
 
@@ -175,7 +170,6 @@ namespace Models.Context
                 {
                     FirstName = "Pablo",
                     LastName = "Escobar",
-                    FriendsList = new FriendsList(),
                     Messages = new List<Message>()
                 }
 

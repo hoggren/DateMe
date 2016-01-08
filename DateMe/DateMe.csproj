@@ -174,10 +174,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\FriendsController.cs" />
     <Compile Include="Controllers\Api\MessagesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -192,6 +194,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Api\FriendDto.cs" />
     <Compile Include="ViewModels\Api\MessageDto.cs" />
     <Compile Include="ViewModels\Api\UserDto.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -265,6 +268,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\Knockout\messageviewmodel.js" />
+    <Content Include="Scripts\Knockout\friendsviewmodel.js" />
     <Content Include="Scripts\Knockout\searchviewmodel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -284,6 +288,7 @@
     <Content Include="Views\Shared\_Messages.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Friends\Index.cshtml" />
     <None Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

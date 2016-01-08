@@ -10,6 +10,35 @@ namespace DateMe.Functions
 {
     public class UserUtilities
     {
+        public static bool AreFriends(string friendId)
+        {
+            var db = new AppDbContext();
+
+            var currentUser = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
+            var friend = db.Users.Find(friendId);
+
+            if (friend != null)
+            {
+                foreach (var f in friend.Profile.Friends)
+                {
+                    if (f.AppUser.Id == currentUser.Id)
+                    {
+                        return true;
+                    }
+                }
+
+                foreach (var f in currentUser.Profile.Friends)
+                {
+                    if (f.AppUser.Id == friend.Id)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public static bool UniqueNickName(string nickname)
         {
             var db = new AppDbContext();
@@ -83,29 +112,20 @@ namespace DateMe.Functions
 
             db.SaveChanges();
         }
-        /*
-        public static int NewFriendRequestCount()
+        
+        public static int UnconfirmedRequestCount()
         {
-
             var db = new AppDbContext();
             var userId = HttpContext.Current.User.Identity.GetUserId();
+            var currentUser = db.Users.Find(userId);
 
-            var unreadMessages = (from u in db.Users
-                                  where u.Id == userId
-                                  join m in db.Messages on u.Profile.ProfileId equals m.Profile.ProfileId
-                                  where m.Read == false
-                                  select m);
-
-            if (unreadMessages == null)
-            {
+            if (currentUser == null)
                 return 0;
-            }
-            else
-            {
-                return unreadMessages.Count();
-            }
+
+            var unconfirmedRequests = currentUser.Profile.Friends.Count(f => f.Confirmed == false);
+
+            return unconfirmedRequests;
         }
-        */
 
         public static int DateToAge(DateTime birthDate)
         {

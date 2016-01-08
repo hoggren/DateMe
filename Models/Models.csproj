@@ -131,8 +131,8 @@
     <Compile Include="Context\AppDbContexts.cs" />
     <Compile Include="Context\AppDbInitializer.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\UserData.cs" />
-    <Compile Include="Models\FriendsList.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Message.cs" />

@@ -123,7 +123,6 @@ namespace DateMe.Controllers
                 
             };
 
-            user.Profile.FriendsList = new FriendsList();
             user.Profile.Messages = new List<Message>();
 
             #endregion usercreation

@@ -8,6 +8,7 @@
 @using (@Html.BeginForm("Edit", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.Password)
+    @Html.HiddenFor(m => m.Active)
 
     <div class="form-group">
         <label for="Firstname">First name</label>

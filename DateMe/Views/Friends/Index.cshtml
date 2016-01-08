@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Friends";
+}
+
+<h2>@ViewBag.Title</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th data-bind="click: function() { sortByColumn('Nickname') }">Nickname</th>
+            <th data-bind="click: function() { sortByColumn('Firstname') }">First name</th>
+            <th data-bind="click: function() { sortByColumn('Lastname') } ">Last name</th>
+            <th data-bind="click: function() { sortByColumn('City') }">City</th>
+            <th data-bind="click: function() { sortByColumn('Category') }">Category</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody data-bind="foreach: friends">
+        <tr>
+            <td><a href="#" data-bind="text: Nickname, attr: { href: '/Profile/U/'+ Id }"></a></td>
+            <td data-bind="text: Firstname"></td>
+            <td data-bind="text: Lastname"></td>
+            <td data-bind="text: City"></td>
+            <td data-bind="text: Category"></td>
+            <td>
+                <select data-bind="event: {change: function() { $parent.changeCategory($data, $element ) } }, options: $parent.categories, optionsCaption: 'Change category'" class="form-control"></select>
+            </td>
+            <td><button type="button" class="btn btn-sm" data-bind="click: function() { $parent.denyFriend(Id) }">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+<table data-bind="visible: unconfirmed().length > 0">
+    <thead>
+    <tr>
+        <th>Nickname</th>
+        <th></th>
+    </tr>
+
+    </thead>
+    <tbody data-bind="foreach: unconfirmed">
+    <tr>
+        <td data-bind="text: Nickname"></td>
+        <td><button type="button" class="btn btn-sm" data-bind="click: function() { $parent.confirmFriend(Id) }">Confirm</button></td>
+        <td><button type="button" class="btn btn-sm" data-bind="click: function() { $parent.denyFriend(Id) }">Deny</button></td>
+    </tr>
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script src="/Scripts/Knockout/friendsviewmodel.js"></script>
+
+}

@@ -1,4 +1,5 @@
-﻿@using DateMe.ViewModels
+﻿@using DateMe.Functions
+@using DateMe.ViewModels
 @model DateMe.ViewModels.ProfileViewModel
 
 @{
@@ -20,7 +21,11 @@
 
 <div class="row">
     <div class="col-md-3">
-        <img src="@Model.PhotoPath" alt="@Model.Nickname's Profile Picture" id="profile_picture" />
+        <img src="@Model.PhotoPath" alt="@Model.Nickname's Profile Picture" id="profile_picture"/>
+        @if (!UserUtilities.AreFriends(Model.Id))
+        {
+            <small><button class="btn btn-default btn-sm" id="btn-add-friend">Add as friend</button></small>
+        }
     </div>
 
     <div class="col-md-9">
@@ -51,6 +56,17 @@
 @section Scripts {
     @Scripts.Render("~/bundles/knockout")
     <script src="/Scripts/Knockout/messageviewmodel.js"></script>
+    <script>
+        $(function() {
+            $("#btn-add-friend").click(function () {
+                var self = this;
+                $.post("/api/friends/@Model.Id", function (data) {
+                    $(self).text("Friend request sent!");
+                    $(self).attr("disabled", true);
+                });
+            });
+        });
+    </script>
 }
 
 

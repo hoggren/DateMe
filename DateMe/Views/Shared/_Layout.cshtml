@@ -2,6 +2,7 @@
 
 @{ 
     var newMessageCount = UserUtilities.NewMessageCount();
+    var newFriendCount = UserUtilities.UnconfirmedRequestCount();
 }
 <!DOCTYPE html>
 <html>
@@ -35,10 +36,11 @@
                                 <span class="badge">@newMessageCount</span>
                             }
                         </a></li>
-                        <li><a href="@Url.Action("Friends", "Profile")">Friends 
-                            
-                            <span class="badge">2</span>
-                            
+                        <li><a href="@Url.Action("Index", "Friends")">Friends 
+                            @if (newFriendCount > 0)
+                            {
+                                <span class="badge">@newFriendCount</span>
+                            }
                         </a></li>
                         <li>@Html.ActionLink("Search", "Index", "Search")</li>
                         <li>@Html.ActionLink("Super-Match!", "Index", "Supermatch")</li>

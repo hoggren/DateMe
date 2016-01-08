@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,17 +37,28 @@ namespace DateMe.Controllers
 
         public ActionResult U(string id)
         {
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
             var requestedUser = db.Users.Find(id);
 
             if(requestedUser != null)
             {
+                if (requestedUser.Id != currentUser.Id)
+                {
+                    requestedUser.Profile.Visitors.Add(currentUser);
+                    var x = currentUser.Profile;
+                    var y = currentUser.UserData;
+
+                    //db.Entry(requestedUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
                 return View(new ProfileViewModel(requestedUser));
             }
             else
             {
                 return RedirectToAction("Index");
             }
-
+            
         }
 
         [HttpGet]

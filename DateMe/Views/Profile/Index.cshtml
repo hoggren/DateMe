@@ -4,7 +4,7 @@
 @model DateMe.ViewModels.ProfileViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "My profile";
 }
 
 <div class="row">
@@ -23,10 +23,12 @@
     <div class="col-md-3">
         <img src="@Model.PhotoPath" alt="@Model.Nickname's Profile Picture" id="profile_picture"/>
 
-        @if (User.Identity.IsAuthenticated)
-        {
             <small>@Html.ActionLink("Edit profile", "Edit", "Profile", new {@class = "btn btn-default btn-sm"})</small>
             <small><a href="/Profile/U/@User.Identity.GetUserId()" class="btn btn-default btn-sm">View as other user</a></small>
+
+        @foreach (var visitor in Model.Visitors)
+        {
+            <strong>@visitor.UserData.Nickname</strong><br />
         }
     </div>
 
@@ -42,6 +44,8 @@
         </p>
 
         <hr/>
+
+
 
     </div>
 </div>
