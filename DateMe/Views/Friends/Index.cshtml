@@ -2,7 +2,7 @@
     ViewBag.Title = "Friends";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title <img src="~/Content/Images/ajax-loader.gif" alt="loading" id="ajax-loader" class="hidden" /></h2>
 
     <table class="table table-striped">
         <thead>
@@ -16,6 +16,14 @@
             <th></th>
         </tr>
         </thead>
+
+        <tbody data-bind="visible: friends().length == 0">
+            <tr>
+                <td>No friends... Yet!</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
 
         <tbody data-bind="foreach: friends">
         <tr>
@@ -32,14 +40,22 @@
         </tbody>
     </table>
 
-<table data-bind="visible: unconfirmed().length > 0">
-    <thead>
-    <tr>
-        <th>Nickname</th>
-        <th></th>
-    </tr>
-
+<h3>Friend requests</h3>
+<table>
+    <thead data-bind="visible: unconfirmed().length > 0">
+        <tr>
+            <th>Nickname</th>
+            <th></th>
+        </tr>
     </thead>
+
+    <tbody data-bind="visible: unconfirmed().length == 0">
+        <tr>
+            <td>No new friend requests</td>
+            <td></td>
+        </tr>
+    </tbody>
+
     <tbody data-bind="foreach: unconfirmed">
     <tr>
         <td data-bind="text: Nickname"></td>

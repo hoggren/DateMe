@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mail;
 using DateMe.Functions;
 using Models.Models;
+using Models.Models.Types;
 
 namespace DateMe.ViewModels
 {
@@ -34,8 +35,10 @@ namespace DateMe.ViewModels
             Id = user.Id;
             Name = $"{profile.FirstName} {profile.LastName}";
 
-            if (userData.Gender.Equals("Male")) Gender = "Man";
-            else if (userData.Gender.Equals("Female")) Gender = "Woman";
+            if      (userData.Gender.Equals(GenderType.Male)) Gender = "Man";
+            else if (userData.Gender.Equals(GenderType.Female)) Gender = "Woman";
+            else if (userData.Gender.Equals(GenderType.Other)) Gender = "Other";
+
             if (userData.LookingFor.Equals("Male")) LookingFor = "men";
             else if (userData.LookingFor.Equals("Female")) LookingFor = "women";
             else LookingFor = "other";

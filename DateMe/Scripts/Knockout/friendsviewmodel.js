@@ -5,7 +5,7 @@
 
     self.changeCategory = function (friend, categoryDom) {
         var selectedCategory = ($(categoryDom).val());
-        console.log(friend);
+
         if (selectedCategory) {
             $.ajax({
                 url: "/api/friends/" + friend.Id + "?category=" + selectedCategory,

@@ -10,11 +10,40 @@ using Models.Models;
 using System.IO;
 using System.Xml;
 using DateMe.ViewModels.Api;
+using System.Data.Entity;
 
 namespace DateMe.Functions
 {
     public class UserUtilities
     {
+        public static List<AppUser> getSuperMatches()
+        {
+            using (var db = new AppDbContext())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+
+                var currentUser = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
+                
+                var lookingForMatch = (from u in db.Users
+                             where currentUser.UserData.Gender == u.UserData.LookingFor
+                             && u.UserData.Gender == currentUser.UserData.LookingFor
+                             select u
+                             );
+
+                var matches = (from u in lookingForMatch
+                               where DbFunctions.DiffYears(currentUser.UserData.DateOfBirth, u.UserData.DateOfBirth) < 5
+                               select u
+                               );
+
+                if (matches == null)
+                {
+                    return new List<AppUser>();
+                }
+
+                return matches.ToList();
+            }
+        }
+
         public static bool AreFriends(string friendId)
         {
             var db = new AppDbContext();

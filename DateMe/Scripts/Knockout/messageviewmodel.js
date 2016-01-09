@@ -38,8 +38,10 @@ var vm = new MessageViewModel();
 $(function() {
     ko.applyBindings(vm);
 
+    $("#ajax-loader").removeClass('hidden');
     $.getJSON("/Api/Messages/", function(data) {
         vm.messages(data);
         vm.messages.reverse();
+        $("#ajax-loader").addClass('hidden');
     });
 });

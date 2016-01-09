@@ -1,0 +1,27 @@
+﻿@model DateMe.ViewModels.SupermatchViewModel
+
+@{
+    ViewBag.Title = "Super-Match!";
+}
+
+<h2>Super-Match!</h2>
+
+<p>This feature will find your perfect match (according to our <small><em>not so secret</em></small> love formula)!</p>
+
+@foreach (var u in Model.Matches)
+{
+    var ageDiff = (u.UserData.DateOfBirth - Model.MyBirthDay).Days;
+    <a href="/Profile/U/@u.Id">@u.UserData.Nickname</a> <span>Age difference: @ageDiff</span>
+}
+
+
+
+
+@if (Model.Matches.Count == 0)
+{
+    <p>Sorry, no matching users found.</p>
+}
+
+<div class="well-sm">
+    <small>Super-Match!&trade; matches your <em>looking for</em> to other users gender, and their <em>looking for</em> to your gender. The maximum age difference are 5 years.</small>
+</div>
