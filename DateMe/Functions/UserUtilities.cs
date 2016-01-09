@@ -5,6 +5,11 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using System.Security;
+using System.Xml.Serialization;
+using Models.Models;
+using System.IO;
+using System.Xml;
+using DateMe.ViewModels.Api;
 
 namespace DateMe.Functions
 {
@@ -70,6 +75,22 @@ namespace DateMe.Functions
             else
             {
                 return false;
+            }
+        }
+
+        public static string exportUser(AppUser user)
+        {
+            using(var db = new AppDbContext())
+            {
+                var xmlUserDto = new XmlUserDto(user);
+                var xmlSerializer = new XmlSerializer(typeof(XmlUserDto));
+
+                using (var sw = new StringWriter())
+                using (var writer = XmlWriter.Create(sw))
+                {
+                    xmlSerializer.Serialize(writer, xmlUserDto);
+                    return sw.ToString();
+                }
             }
         }
 

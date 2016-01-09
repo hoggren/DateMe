@@ -11,6 +11,12 @@ namespace Models.Models
 {
     public class AppUser : IdentityUser
     {
+
+        public AppUser() : base()
+        {
+            
+        }
+
         public bool Active { get; set; }
 
         public bool Visible { get; set; }

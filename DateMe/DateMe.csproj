@@ -197,6 +197,7 @@
     <Compile Include="ViewModels\Api\FriendDto.cs" />
     <Compile Include="ViewModels\Api\MessageDto.cs" />
     <Compile Include="ViewModels\Api\UserDto.cs" />
+    <Compile Include="ViewModels\Api\XmlUserDto.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

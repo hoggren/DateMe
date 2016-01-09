@@ -13,7 +13,7 @@ namespace Models.Models
         {
             Messages = new List<Message>();
             Friends = new List<Friend>();
-            Visitors = new List<AppUser>();
+            Visitors = new List<Visitor>();
         }
 
         [Key]
@@ -27,7 +27,6 @@ namespace Models.Models
 
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Friend> Friends { get; set; }
-
-        public virtual ICollection<AppUser> Visitors { get; set; }
+        public virtual ICollection<Visitor> Visitors { get; set; }
     }
 }

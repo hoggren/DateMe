@@ -11,6 +11,8 @@ using Models.Models;
 using System.IO;
 
 using DateMe.Functions;
+using System.Diagnostics;
+using System.Xml;
 
 namespace DateMe.Controllers
 {
@@ -37,18 +39,22 @@ namespace DateMe.Controllers
 
         public ActionResult U(string id)
         {
-            var currentUser = db.Users.Find(User.Identity.GetUserId());
-            var requestedUser = db.Users.Find(id);
+            // Visitor Logging!
+            var currentUserId = User.Identity.GetUserId();
+
+            var currentUser = (from u in db.Users
+                               where u.Id == currentUserId
+                               select u).SingleOrDefault();
+
+            var requestedUser = (from u in db.Users
+                                 where u.Id == id
+                                 select u).SingleOrDefault();
 
             if(requestedUser != null)
             {
                 if (requestedUser.Id != currentUser.Id)
                 {
-                    requestedUser.Profile.Visitors.Add(currentUser);
-                    var x = currentUser.Profile;
-                    var y = currentUser.UserData;
-
-                    //db.Entry(requestedUser).State = EntityState.Modified;
+                    (requestedUser.Profile.Visitors as List<Visitor>).Insert(0, new Visitor { AppUser = currentUser });
                     db.SaveChanges();
                 }
                 
@@ -59,6 +65,13 @@ namespace DateMe.Controllers
                 return RedirectToAction("Index");
             }
             
+        }
+
+        [HttpGet]
+        public ActionResult Export()
+        {
+            var currentUser = db.Users.Find(User.Identity.GetUserId());
+            return Content(UserUtilities.exportUser(currentUser), "text/xml");
         }
 
         [HttpGet]

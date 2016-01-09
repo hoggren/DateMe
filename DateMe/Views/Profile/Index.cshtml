@@ -23,12 +23,15 @@
     <div class="col-md-3">
         <img src="@Model.PhotoPath" alt="@Model.Nickname's Profile Picture" id="profile_picture"/>
 
-            <small>@Html.ActionLink("Edit profile", "Edit", "Profile", new {@class = "btn btn-default btn-sm"})</small>
+            <small>@Html.ActionLink("Edit profile", "Edit", "Profile", new { @class = "btn btn-default btn-sm" })</small>
             <small><a href="/Profile/U/@User.Identity.GetUserId()" class="btn btn-default btn-sm">View as other user</a></small>
+            
+        <h5 class="profile_bold">Latest visitors</h5>
 
-        @foreach (var visitor in Model.Visitors)
+        @{ Model.Visitors.Reverse(); }
+        @foreach (var visitor in Model.Visitors.Take(5))
         {
-            <strong>@visitor.UserData.Nickname</strong><br />
+            <small><a href="/Profile/U/@visitor.AppUser.Id">@visitor.AppUser.UserData.Nickname</a> - <em data-visit="@visitor.DateTime.ToString("s")"></em></small><br />
         }
     </div>
 
@@ -60,6 +63,14 @@
 
     <script src="/Scripts/Other/modal-confirm.js"></script>
     <script src="/Scripts/Knockout/messageviewmodel.js"></script>
+    <script>
+        $(function () {
+            $("[data-visit]").each(function () {
+                var time = moment($(this).attr("data-visit")).fromNow();
+                $(this).text(time);
+            });
+        });
+    </script>
 }
 
 

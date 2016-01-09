@@ -5,6 +5,8 @@
 
 <h2>Edit profile</h2>
 
+<small>@Html.ActionLink("Export Profile", "Export")</small>
+
 @using (@Html.BeginForm("Edit", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.Password)
