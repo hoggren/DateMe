@@ -1,23 +1,26 @@
 ﻿@using DateMe.Functions
+@using System.Threading
+
 @model DateMe.ViewModels.HomeViewModel
+
 @{
     ViewBag.Title = "Start";
 }
 
 <div class="jumbotron">
-    <h1>Welcome</h1>
+    <h1>@Resource.Jumbotron_Greeting</h1>
 
-    <p class="lead">DateMe&trade; is the world's leading venue for singles looking to pork oh so hard</p>
+    <p class="lead">@Resource.Jumbotron_Text</p>
 
     @if (!User.Identity.IsAuthenticated)
     {
         <p>
-            <a href="@Url.Action("Register","Auth")" class="btn btn-primary btn-lg">Register now &raquo;</a>
+            <a href="@Url.Action("Register","Auth")" class="btn btn-primary btn-lg">@Resource.Jumbotron_Button &raquo;</a>
         </p>
     }
 </div>
 
-<h3>Some of our members</h3>
+<h3>@Resource.MemberRoll</h3>
 <div class="row-centered">
     <div class="col-md-1"></div>
     @foreach (var u in Model.ExampleUsers)
@@ -45,20 +48,30 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h4>Getting started</h4>
-        <p>
-            Register and create your profile to meet your dream gal or lad straight away!
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <h4>@Resource.FirstColumnHeader</h4>
+        <p>@Resource.FirstColumnText</p>
+
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">@Resource.ButtonLearnMore &raquo;</a></p>
     </div>
+
     <div class="col-md-4">
-        <h4>Unique profile matching</h4>
-        <p>Compare your interests to other singles to find your perfect match</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h4>@Resource.SecondColumnHeader</h4>
+        <p>@Resource.SecondColumnText</p>
+
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">@Resource.ButtonLearnMore &raquo;</a></p>
     </div>
+
     <div class="col-md-4">
-        <h4>Coming soon: DateMe Premium</h4>
-        <p>In a near future, for just $10 a month, premium members will get access to exclusive new features</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h4>@Resource.ThirdColumnHeader</h4>
+        <p>@Resource.ThirdColumnText</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">@Resource.ButtonLearnMore &raquo;</a></p>
     </div>
 </div>
+@if (Request.QueryString["lang"] != "sv")
+{
+    <a href="?lang=sv">Visa på svenska</a>
+}
+else
+{
+    <a href="?lang=en">Show in english</a>
+}

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using DateMe.ViewModels;
 using Models.Context;
 using Models.Models;
+using System.Threading;
+using System.Globalization;
 
 namespace DateMe.Controllers
 {
@@ -14,8 +16,14 @@ namespace DateMe.Controllers
     {
         private readonly AppDbContext _db = new AppDbContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string lang)
         {
+
+            if (lang == "SV" || lang == "sv")
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("sv-SE");
+            }
+
             var exampleUsers = (from u in _db.Users
                                 where u.Active == true
                                 orderby u.Id descending 
@@ -26,8 +34,6 @@ namespace DateMe.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

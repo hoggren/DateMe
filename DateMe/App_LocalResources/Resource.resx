@@ -117,25 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonLearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
   <data name="FirstColumnHeader" xml:space="preserve">
-    <value>Kom igång</value>
+    <value>Getting started</value>
   </data>
   <data name="FirstColumnText" xml:space="preserve">
-    <value>Registrera dig och skapa din profil för att träffa din drömbrud eller drömgrabb med detsamma!</value>
+    <value>Register now and meet people from all over the world.</value>
   </data>
-  <data name="Greeting" xml:space="preserve">
-    <value>Välkommen</value>
+  <data name="Jumbotron_Button" xml:space="preserve">
+    <value>Register now</value>
+  </data>
+  <data name="Jumbotron_Greeting" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Jumbotron_Text" xml:space="preserve">
+    <value>DateMe is the world's leading venue for singles looking to pork oh so hard</value>
+  </data>
+  <data name="MemberRoll" xml:space="preserve">
+    <value>Some of our members</value>
   </data>
   <data name="SecondColumnHeader" xml:space="preserve">
-    <value>Unik profilmatchning</value>
+    <value>Unique profile matching</value>
   </data>
   <data name="SecondColumnText" xml:space="preserve">
-    <value>Jämför dina intressen med andra singlar för att hitta din perfekta matchning.</value>
+    <value>Compare your preferences using our Super-Match och find your perfect match</value>
   </data>
   <data name="ThirdColumnHeader" xml:space="preserve">
-    <value>Kommer snart: DateMe Premium</value>
+    <value>DateMe Premium - Soon available</value>
   </data>
   <data name="ThirdColumnText" xml:space="preserve">
-    <value>Inom kort kommer premiummedlemmar att för endast 100 kr/månad få exklusiv tillgång till nya funktioner.</value>
+    <value>With Premium you can try our latest features before anyone else!</value>
   </data>
 </root>

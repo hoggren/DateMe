@@ -1,6 +1,9 @@
 ﻿@using DateMe.Functions
 
 @{ 
+    var currentController = ViewContext.RouteData.Values["Controller"].ToString();
+    var currentAction = @ViewContext.RouteData.Values["Action"].ToString();
+
     var newMessageCount = UserUtilities.NewMessageCount();
     var newFriendCount = UserUtilities.UnconfirmedRequestCount();
 }
@@ -13,6 +16,17 @@
     @Styles.Render("~/Content/css")
     @RenderSection("Styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .nav li.active-arrow:after {
+            content: ' ';
+            position: absolute;
+	        border-left: 5px solid transparent;
+	        border-right: 5px solid transparent;
+	        border-bottom: 5px solid white;
+            left: 42%;
+            bottom: -1px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" id="top-nav">
@@ -30,25 +44,25 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a href="@Url.Action("Index", "Profile")">Profile 
+                        <li class="@(currentController == "Profile" ? "active-arrow" : "")"><a href="@Url.Action("Index", "Profile")">Profile 
                             @if (newMessageCount > 0)
                             {
                                 <span class="badge">@newMessageCount</span>
                             }
                         </a></li>
-                        <li><a href="@Url.Action("Index", "Friends")">Friends 
+                        <li class="@(currentController == "Friends" ? "active-arrow" : "")"><a href="@Url.Action("Index", "Friends")">Friends 
                             @if (newFriendCount > 0)
                             {
                                 <span class="badge">@newFriendCount</span>
                             }
                         </a></li>
-                        <li>@Html.ActionLink("Search", "Index", "Search")</li>
-                        <li>@Html.ActionLink("Super-Match!", "Index", "Supermatch")</li>
+                        <li class="@(currentController == "Search" ? "active-arrow" : "")">@Html.ActionLink("Search", "Index", "Search")</li>
+                        <li class="@(currentController == "Supermatch" ? "active-arrow" : "")">@Html.ActionLink("Super-Match!", "Index", "Supermatch")</li>
 
                     }
                     else
                     {
-                        <li>
+                        <li class="@(currentAction == "Register" ? "active-arrow" : "")">
                             @Html.ActionLink("Register", "Register", "Auth")
                         </li>
 
@@ -62,11 +76,11 @@
                     }
                     else
                     {
-                        <li>
+                        <li class="@(currentAction == "Login" ? "active-arrow" : "")">
                             @Html.ActionLink("Login", "Login", "Auth")
                         </li>
                     }
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="@(currentAction == "About" ? "active-arrow" : "")">@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
             </div>
         </div>
