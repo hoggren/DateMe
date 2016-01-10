@@ -8,14 +8,12 @@
 
 <p>This feature will find your perfect match (according to our <small><em>not so secret</em></small> love formula)!</p>
 
+<h4>Matches</h4>
 @foreach (var u in Model.Matches)
 {
-    var ageDiff = (u.UserData.DateOfBirth - Model.MyBirthDay).Days;
-    <a href="/Profile/U/@u.Id">@u.UserData.Nickname</a> <span>Age difference: @ageDiff</span>
+    var diff = (u.UserData.DateOfBirth - Model.MyBirthDay).Days / 365;
+    <a href="/Profile/U/@u.Id">@u.UserData.Nickname</a><span> - @u.UserData.Gender Looking for @u.UserData.LookingFor (age difference: @diff year(s))</span><br />
 }
-
-
-
 
 @if (Model.Matches.Count == 0)
 {

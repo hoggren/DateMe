@@ -10,6 +10,12 @@
     <div class="col-md-12">
         <h2 class="profile_bold">
             @Model.Nickname (@Model.Location.City, @Model.Location.Country)
+
+            @if (UserUtilities.IsSuperMatched(Model.Id))
+            {
+                <img src="~/Content/Images/match.png" alt="matching" /> <small>A Super-Match!</small>
+            }
+            
         </h2>
         <h4>
             @Model.Age year old @Model.Gender.ToLower() looking for @Model.LookingFor

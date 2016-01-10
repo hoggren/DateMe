@@ -16,31 +16,54 @@ namespace DateMe.Functions
 {
     public class UserUtilities
     {
+        public static bool IsSuperMatched(string id)
+        {
+            using (var db = new AppDbContext())
+            {
+                var currentUser = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
+                var profile = db.Users.Find(id);
+
+                if (profile != null)
+                {
+                    if (currentUser.UserData.Gender == profile.UserData.LookingFor &&
+                        currentUser.UserData.LookingFor == profile.UserData.Gender &&
+                        (currentUser.UserData.DateOfBirth.Subtract(profile.UserData.DateOfBirth)).Days >= -(365 * 5) &&
+                        (currentUser.UserData.DateOfBirth.Subtract(profile.UserData.DateOfBirth)).Days <= (365 * 5)
+                        ) 
+
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
         public static List<AppUser> getSuperMatches()
         {
             using (var db = new AppDbContext())
             {
-                db.Configuration.LazyLoadingEnabled = false;
+                //db.Configuration.LazyLoadingEnabled = false;
 
                 var currentUser = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
                 
-                var lookingForMatch = (from u in db.Users
-                             where currentUser.UserData.Gender == u.UserData.LookingFor
+                var lookingForMatch = (from u in db.Users.Include(u => u.UserData)
+                                       where currentUser.UserData.Gender == u.UserData.LookingFor
                              && u.UserData.Gender == currentUser.UserData.LookingFor
                              select u
                              );
 
                 var matches = (from u in lookingForMatch
-                               where DbFunctions.DiffYears(currentUser.UserData.DateOfBirth, u.UserData.DateOfBirth) < 5
+                               where DbFunctions.DiffYears(currentUser.UserData.DateOfBirth, u.UserData.DateOfBirth) <= 5
                                select u
                                );
 
-                if (matches == null)
+                if (matches != null)
                 {
-                    return new List<AppUser>();
+                    return matches.ToList();
                 }
 
-                return matches.ToList();
+                return new List<AppUser>();
             }
         }
 

@@ -6,11 +6,18 @@
 
 <div class="jumbotron">
     <h1>Welcome</h1>
+
     <p class="lead">DateMe&trade; is the world's leading venue for singles looking to pork oh so hard</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>
-    </p>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>
+            <a href="@Url.Action("Register","Auth")" class="btn btn-primary btn-lg">Register now &raquo;</a>
+        </p>
+    }
 </div>
 
+<h3>Some of our members</h3>
 <div class="row-centered">
     <div class="col-md-1"></div>
     @foreach (var u in Model.ExampleUsers)
@@ -38,19 +45,19 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h4>Getting started</h4>
         <p>
             Register and create your profile to meet your dream gal or lad straight away!
         </p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Unique profile matching</h2>
+        <h4>Unique profile matching</h4>
         <p>Compare your interests to other singles to find your perfect match</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Coming soon: DateMe Premium</h2>
+        <h4>Coming soon: DateMe Premium</h4>
         <p>In a near future, for just $10 a month, premium members will get access to exclusive new features</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>

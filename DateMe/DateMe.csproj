@@ -220,6 +220,7 @@
     <Content Include="Content\Images\default_users\tommy.jpg" />
     <Content Include="Content\Images\example_sexy.png" />
     <Content Include="Content\Images\glyphicons-17-bin.png" />
+    <Content Include="Content\Images\match.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
