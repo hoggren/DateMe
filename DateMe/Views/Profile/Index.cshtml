@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿    @using Microsoft.AspNet.Identity
 @using DateMe.ViewModels
 
 @model DateMe.ViewModels.ProfileViewModel
@@ -27,12 +27,13 @@
             <small><a href="/Profile/U/@User.Identity.GetUserId()" class="btn btn-default btn-sm">View as other user</a></small>
             
         <h5 class="profile_bold">Latest visitors</h5>
+        <div id="visitors" data-bind="foreach: visitors">
+            <small>
+                <a href="#" data-bind="text: Nickname, attr: { href: 'Profile/U/' + Id }"></a> -
+                <em data-bind="text: $parent.toRelativeTime(TimeOfVisit)"></em>
+            </small><br />
+        </div>
 
-        @{ Model.Visitors.Reverse(); }
-        @foreach (var visitor in Model.Visitors.Take(5))
-        {
-            <small><a href="/Profile/U/@visitor.AppUser.Id">@visitor.AppUser.UserData.Nickname</a> - <em data-visit="@visitor.DateTime.ToString("s")"></em></small><br />
-        }
     </div>
 
     <div class="col-md-9">
@@ -62,15 +63,8 @@
     @Scripts.Render("~/bundles/momentjs");
 
     <script src="/Scripts/Other/modal-confirm.js"></script>
+<script src="/Scripts/Knockout/visitorviewmodel.js"></script>
     <script src="/Scripts/Knockout/messageviewmodel.js"></script>
-    <script>
-        $(function () {
-            $("[data-visit]").each(function () {
-                var time = moment($(this).attr("data-visit")).fromNow();
-                $(this).text(time);
-            });
-        });
-    </script>
 }
 
 

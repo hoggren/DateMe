@@ -8,40 +8,40 @@
         return moment(dateObj).fromNow();
     };
 
-    self.sendMessage = function (toUserId) {
-        $.post("/api/messages/?toUserId=" + toUserId, { Text: self.messageText() }, function (data) {
-            $("#send-message-form").fadeOut(function () {
+    self.sendMessage = function(toUserId) {
+        $.post("/api/messages/?toUserId=" + toUserId, { Text: self.messageText() }, function(data) {
+            $("#send-message-form").fadeOut(function() {
                 $("#send-message-title").text("Your message has been sent!");
             });
         });
     }
 
-    self.removeMessage = function (message) {
+    self.removeMessage = function(message) {
         modalConfirm(function() {
             $.ajax({
                 type: "DELETE",
                 url: "/api/messages/" + message.Id,
                 contentType: "application/json",
-                success: function () {
+                success: function() {
                     self.messages.remove(message);
                 },
-                error: function () {
+                error: function() {
                     alert("Det gick inte att ta bort detta meddelande");
                 }
             });
         });
     }
-}
+};
 
-var vm = new MessageViewModel();
+var messageVm = new MessageViewModel();
 
 $(function() {
-    ko.applyBindings(vm);
+    ko.applyBindings(messageVm, document.getElementById('messages'));
 
     $("#ajax-loader").removeClass('hidden');
     $.getJSON("/Api/Messages/", function(data) {
-        vm.messages(data);
-        vm.messages.reverse();
+        messageVm.messages(data);
+        messageVm.messages.reverse();
         $("#ajax-loader").addClass('hidden');
     });
 });

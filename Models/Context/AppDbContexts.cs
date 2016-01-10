@@ -14,6 +14,7 @@ namespace Models.Context
 
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Visitor> Visitors { get; set; }
         public System.Data.Entity.DbSet<Friend> Friends { get; set; }
     }
 }

@@ -177,6 +177,7 @@
     <Compile Include="Controllers\Api\FriendsController.cs" />
     <Compile Include="Controllers\Api\MessagesController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Api\VisitorsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="ViewModels\Api\FriendDto.cs" />
     <Compile Include="ViewModels\Api\MessageDto.cs" />
     <Compile Include="ViewModels\Api\UserDto.cs" />
+    <Compile Include="ViewModels\Api\VisitorDto.cs" />
     <Compile Include="ViewModels\Api\XmlUserDto.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ProfileEditViewModel.cs" />
@@ -279,6 +281,7 @@
     <Content Include="Scripts\Knockout\messageviewmodel.js" />
     <Content Include="Scripts\Knockout\friendsviewmodel.js" />
     <Content Include="Scripts\Knockout\searchviewmodel.js" />
+    <Content Include="Scripts\Knockout\visitorviewmodel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\Other\modal-confirm.js" />

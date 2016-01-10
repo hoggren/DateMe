@@ -39,7 +39,6 @@ namespace DateMe.Controllers
 
         public ActionResult U(string id)
         {
-            // Visitor Logging!
             var currentUserId = User.Identity.GetUserId();
 
             var currentUser = (from u in db.Users
@@ -50,20 +49,16 @@ namespace DateMe.Controllers
                                  where u.Id == id
                                  select u).SingleOrDefault();
 
-            if(requestedUser != null)
+            if (requestedUser != null)
             {
                 if (requestedUser.Id != currentUser.Id)
                 {
                     (requestedUser.Profile.Visitors as List<Visitor>).Insert(0, new Visitor { AppUser = currentUser });
                     db.SaveChanges();
                 }
-                
-                return View(new ProfileViewModel(requestedUser));
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+
+            return View(new ProfileViewModel(requestedUser));
             
         }
 

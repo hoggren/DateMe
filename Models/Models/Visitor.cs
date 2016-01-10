@@ -11,7 +11,7 @@ namespace Models.Models
     {
         public Visitor()
         {
-            DateTime = DateTime.Now;
+            TimeOfVisit = DateTime.Now;
         }
 
         [Key]
@@ -19,6 +19,6 @@ namespace Models.Models
         public Guid VisitorId { get; set; }
 
         public virtual AppUser AppUser { get; set; }
-        public virtual DateTime DateTime { get;set; }
+        public virtual DateTime TimeOfVisit { get;set; }
     }
 }
