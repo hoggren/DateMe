@@ -20,7 +20,7 @@ namespace DateMe.Controllers.Api
         private static readonly Expression<Func<Visitor, VisitorDto>> AsVisitorDto =
             visitor => new VisitorDto
             {
-                Id = visitor.VisitorId.ToString(),
+                Id = visitor.AppUser.Id,
                 Nickname = visitor.AppUser.UserData.Nickname,
                 TimeOfVisit = visitor.TimeOfVisit
             };
@@ -36,7 +36,7 @@ namespace DateMe.Controllers.Api
                 return (_db.Users.Find(new Guid()).Profile.Visitors).AsQueryable().Select(AsVisitorDto).Take(5);
             }
 
-            return (_db.Users.Find(currentUserId).Profile.Visitors).AsQueryable().Select(AsVisitorDto).Take(5);
+            return (_db.Users.Find(currentUserId).Profile.Visitors).AsQueryable().Select(AsVisitorDto).Take(5).Reverse();
         }
        
 

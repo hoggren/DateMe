@@ -38,8 +38,6 @@ namespace DateMe.Controllers.Api
                 where u.UserData.Nickname.Contains(query)
                       && u.Visible == true && u.Active == true
                 select u).Select(AsUserDto);
-
-            //return db.Users.Where(u => u.UserData.Nickname.Contains(query)).Select(AsUserDto);
         }
 
         [ResponseType(typeof(UserDto))]

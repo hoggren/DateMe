@@ -11,8 +11,7 @@
                 '</div>' +
             '</div>' +
         '</div>');
-
-    $("body").prepend(modal);
+    if (!$('#confirmModal')[0]) $("body").prepend(modal);
 
     $("#confirm-modal-btn").click(function () {
         $("#confirmModal").modal("hide");

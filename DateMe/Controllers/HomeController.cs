@@ -25,7 +25,7 @@ namespace DateMe.Controllers
             }
 
             var exampleUsers = (from u in _db.Users
-                                where u.Active == true
+                                where u.Active == true && u.Visible == true
                                 orderby u.Id descending 
                                 select u).Take(5).ToList();
 
@@ -34,6 +34,14 @@ namespace DateMe.Controllers
 
         public ActionResult About()
         {
+            return View();
+        }
+
+        public ActionResult Error(string id, string message)
+        {
+            ViewBag.ErrorCode = id;
+            ViewBag.Message = message;
+
             return View();
         }
 

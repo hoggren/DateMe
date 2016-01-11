@@ -26,7 +26,6 @@ namespace DateMe.Controllers
         {
             Exception e = filterContext.Exception;
             filterContext.ExceptionHandled = true;
-           // var model = new HandleErrorInfo(filterContext.Exception, "Home", "Error");
 
             filterContext.Result = new ViewResult
             {

@@ -10,7 +10,7 @@ using Models.Models;
 
 namespace Models.Context
 {
-    public class AppDbInitializer : DropCreateDatabaseAlways<AppDbContext> //DropCreateDatabaseIfModelChanges<AppDbContext>
+    public class AppDbInitializer : CreateDatabaseIfNotExists<AppDbContext>
     {
         protected override void Seed(AppDbContext context)
         {

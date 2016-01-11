@@ -45,18 +45,9 @@ namespace DateMe.Functions
             using (var db = new AppDbContext())
             {
                 var currentUser = db.Users.Find(HttpContext.Current.User.Identity.GetUserId());
-                
-                var lookingForMatch = (from u in db.Users.Include(u => u.UserData)
-                                       where currentUser.UserData.Gender == u.UserData.LookingFor
-                                     && u.UserData.Gender == currentUser.UserData.LookingFor
-                                     && currentUser.Id != u.Id
-                                     select u
-                                     );
 
-                var matches = (from u in lookingForMatch
-                               where DbFunctions.DiffYears(currentUser.UserData.DateOfBirth, u.UserData.DateOfBirth) <= 5
-                               select u
-                               );
+                var matches = (from u in db.Users.Include(u => u.UserData)
+                                select u).AsEnumerable().Where(u => IsSuperMatched(u.Id));
 
                 if (matches != null)
                 {

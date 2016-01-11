@@ -46,7 +46,7 @@ namespace DateMe.Controllers
                                select u).SingleOrDefault();
 
             var requestedUser = (from u in db.Users
-                                 where u.Id == id
+                                 where u.Id == id && u.Active == true
                                  select u).SingleOrDefault();
 
             if (requestedUser != null)
@@ -56,10 +56,10 @@ namespace DateMe.Controllers
                     (requestedUser.Profile.Visitors as List<Visitor>).Insert(0, new Visitor { AppUser = currentUser });
                     db.SaveChanges();
                 }
+                return View(new ProfileViewModel(requestedUser));
             }
 
-            return View(new ProfileViewModel(requestedUser));
-            
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

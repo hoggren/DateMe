@@ -19,7 +19,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace DateMe.Controllers.Api
 {
-    public class FriendsController : ApiController
+    public class FriendsController : BaseApiController
     {
         private AppDbContext db = new AppDbContext();
 
